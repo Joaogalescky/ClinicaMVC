@@ -30,7 +30,7 @@ public class TelaLogin extends JFrame {
 		setLayout(null);
 		setLocationRelativeTo(null);
 
-		JLabel lblUsername = new JLabel("Username:");
+		JLabel lblUsername = new JLabel("Usuário:");
 		lblUsername.setBounds(30, 30, 80, 25);
 		add(lblUsername);
 
@@ -38,7 +38,7 @@ public class TelaLogin extends JFrame {
 		txtUsername.setBounds(120, 30, 150, 25);
 		add(txtUsername);
 
-		JLabel lblPassword = new JLabel("Password:");
+		JLabel lblPassword = new JLabel("Senha:");
 		lblPassword.setBounds(30, 70, 80, 25);
 		add(lblPassword);
 

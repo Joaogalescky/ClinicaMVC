@@ -17,9 +17,20 @@ public class TelaCadUser extends JFrame {
 	private static final long serialVersionUID = 5756598100844974336L;
 
 	private JLabel nomeJLabel;
-	private JTextField nomeJTxtField;
+	private JLabel dataNascimentoJLabel;
+	private JLabel cpfJLabel;
+	private JLabel rgJLabel;
 	private JLabel foneJLabel;
+	private JLabel emailJLabel;
+	private JLabel enderecoJLabel;
+	private JTextField nomeJTxtField;
+	private JTextField dataNascimentoJTxtField;
+	private JTextField cpfJTxtField;
+	private JTextField rgJTxtField;
 	private JTextField foneJTxtField;
+	private JTextField emailJTxtField;
+	private JTextField enderecoJTxtField;
+
 	public JButton incluirBtn;
 	public JButton limparBtn;
 	public JButton cancelarBtn;
@@ -32,8 +43,19 @@ public class TelaCadUser extends JFrame {
 
 		nomeJLabel = new JLabel("Nome");
 		nomeJTxtField = new JTextField();
+		dataNascimentoJLabel = new JLabel("Data de Nascimento");
+		dataNascimentoJTxtField = new JTextField();
+		cpfJLabel = new JLabel("CPF");
+		cpfJTxtField = new JTextField();
+		rgJLabel = new JLabel("RG");
+		rgJTxtField = new JTextField();
 		foneJLabel = new JLabel("Telefone");
 		foneJTxtField = new JTextField();
+		emailJLabel = new JLabel("E-mail");
+		emailJTxtField = new JTextField();
+		enderecoJLabel = new JLabel("Endereço");
+		enderecoJTxtField = new JTextField();
+		
 		incluirBtn = new JButton("Incluir");
 		alterarBtn = new JButton("Alterar");
 		limparBtn = new JButton("Limpar");
@@ -42,15 +64,25 @@ public class TelaCadUser extends JFrame {
 		excluirBtn = new JButton("Excluir");
 
 		setSize(450, 200);
-		// setTitle("Cadastro de Usuarios");
+		setTitle("Cadastro de Usuarios");
 		setVisible(true);
 		setLayout(null);
 		setLocationRelativeTo(null);
 
 		nomeJLabel.setBounds(10, 10, 100, 25);
 		nomeJTxtField.setBounds(50, 10, 200, 25);
+		dataNascimentoJLabel.setBounds(10, 50, 100, 25);
+		dataNascimentoJTxtField.setBounds(70, 50, 200, 25);
+		cpfJLabel.setBounds(10, 50, 100, 25);
+		cpfJTxtField.setBounds(70, 50, 200, 25);
+		rgJLabel.setBounds(10, 50, 100, 25);
+		rgJTxtField.setBounds(70, 50, 200, 25);
 		foneJLabel.setBounds(10, 50, 100, 25);
 		foneJTxtField.setBounds(70, 50, 200, 25);
+		emailJLabel.setBounds(10, 50, 100, 25);
+		emailJTxtField.setBounds(70, 50, 200, 25);
+		enderecoJLabel.setBounds(10, 50, 100, 25);
+		enderecoJTxtField.setBounds(70, 50, 200, 25);
 
 		incluirBtn.setBounds(20, 100, 70, 25);
 		limparBtn.setBounds(80, 100, 70, 25);
@@ -61,8 +93,19 @@ public class TelaCadUser extends JFrame {
 
 		add(nomeJLabel);
 		add(nomeJTxtField);
+		add(dataNascimentoJLabel);
+		add(dataNascimentoJTxtField);
+		add(cpfJLabel);
+		add(cpfJTxtField);
+		add(rgJLabel);
+		add(rgJTxtField);
 		add(foneJLabel);
 		add(foneJTxtField);
+		add(emailJLabel);
+		add(emailJTxtField);
+		add(enderecoJLabel);
+		add(enderecoJTxtField);
+		
 		add(incluirBtn);
 		add(limparBtn);
 		add(cancelarBtn);
@@ -79,7 +122,15 @@ public class TelaCadUser extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					UsuarioController usuarioController = new UsuarioController();
-					usuarioController.cadastrarUsuario(nomeJTxtField.getText(), foneJTxtField.getText());
+					usuarioController.cadastrarUsuario(
+							nomeJTxtField.getText(), 
+							dataNascimentoJTxtField.getText(), 
+							cpfJTxtField.getText(), 
+							rgJTxtField.getText(), 
+							foneJTxtField.getText(), 
+							emailJTxtField.getText(),
+							enderecoJTxtField.getText()
+							);
 					JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso");
 					limparCampos();
 				} catch (Exception ex) {
@@ -97,7 +148,12 @@ public class TelaCadUser extends JFrame {
 					Usuario usuario = usuarioController.consultarUsuario(nomeJTxtField.getText());
 					if (usuario != null) {
 						nomeJTxtField.setText(usuario.getNome());
+						dataNascimentoJTxtField.setText(usuario.getDataNascimento());
+						cpfJTxtField.setText(usuario.getCpf());
+						rgJTxtField.setText(usuario.getRg());
 						foneJTxtField.setText(usuario.getTelefone());
+						emailJTxtField.setText(usuario.getEmail());
+						enderecoJTxtField.setText(usuario.getEndereco());
 						alterarBtn.setEnabled(true);
 						excluirBtn.setEnabled(true);
 					}
@@ -114,7 +170,15 @@ public class TelaCadUser extends JFrame {
 				try {
 					UsuarioController usuarioController = new UsuarioController();
 					int codUser = Integer.parseInt(JOptionPane.showInputDialog("Informe o id do usuario"));
-					usuarioController.alterarUsuario(codUser, nomeJTxtField.getText(), foneJTxtField.getText());
+					usuarioController.alterarUsuario(
+							codUser, nomeJTxtField.getText(), 
+							dataNascimentoJTxtField.getText(), 
+							cpfJTxtField.getText(), 
+							rgJTxtField.getText(), 
+							foneJTxtField.getText(), 
+							emailJTxtField.getText(), 
+							enderecoJTxtField.getText()
+							);
 					JOptionPane.showMessageDialog(null, "Usuario alterado com sucesso");
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage());
