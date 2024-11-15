@@ -57,3 +57,5 @@ CREATE TABLE Usuario (
     username VARCHAR(50) NOT NULL,
     password VARCHAR(50) NOT NULL
 );
+
+INSERT INTO Usuario (username, password) VALUES ('admin', 'admin123');
