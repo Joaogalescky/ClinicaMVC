@@ -63,33 +63,33 @@ public class TelaCadUser extends JFrame {
 		consultarBtn = new JButton("Consultar");
 		excluirBtn = new JButton("Excluir");
 
-		setSize(450, 200);
+		setSize(550, 320);  // (largura, altura)
 		setTitle("Cadastro de Usuarios");
 		setVisible(true);
 		setLayout(null);
 		setLocationRelativeTo(null);
 
 		nomeJLabel.setBounds(10, 10, 100, 25);
-		nomeJTxtField.setBounds(50, 10, 200, 25);
-		dataNascimentoJLabel.setBounds(10, 50, 100, 25);
-		dataNascimentoJTxtField.setBounds(70, 50, 200, 25);
-		cpfJLabel.setBounds(10, 50, 100, 25);
-		cpfJTxtField.setBounds(70, 50, 200, 25);
-		rgJLabel.setBounds(10, 50, 100, 25);
-		rgJTxtField.setBounds(70, 50, 200, 25);
-		foneJLabel.setBounds(10, 50, 100, 25);
-		foneJTxtField.setBounds(70, 50, 200, 25);
-		emailJLabel.setBounds(10, 50, 100, 25);
-		emailJTxtField.setBounds(70, 50, 200, 25);
-		enderecoJLabel.setBounds(10, 50, 100, 25);
-		enderecoJTxtField.setBounds(70, 50, 200, 25);
+		nomeJTxtField.setBounds(150, 10, 200, 25);
+		dataNascimentoJLabel.setBounds(10, 40, 200, 25);
+		dataNascimentoJTxtField.setBounds(150, 40, 200, 25);
+		cpfJLabel.setBounds(10, 70, 100, 25);
+		cpfJTxtField.setBounds(150, 70, 200, 25);
+		rgJLabel.setBounds(10, 100, 100, 25);
+		rgJTxtField.setBounds(150, 100, 200, 25);
+		foneJLabel.setBounds(10, 130, 100, 25);
+		foneJTxtField.setBounds(150, 130, 200, 25);
+		emailJLabel.setBounds(10, 160, 100, 25);
+		emailJTxtField.setBounds(150, 160, 200, 25);
+		enderecoJLabel.setBounds(10, 190, 100, 25);
+		enderecoJTxtField.setBounds(150, 190, 200, 25);
 
-		incluirBtn.setBounds(20, 100, 70, 25);
-		limparBtn.setBounds(80, 100, 70, 25);
-		cancelarBtn.setBounds(140, 100, 80, 25);
-		consultarBtn.setBounds(210, 100, 90, 25);
-		alterarBtn.setBounds(290, 100, 80, 25);
-		excluirBtn.setBounds(360, 100, 80, 25);
+		incluirBtn.setBounds(20, 230, 70, 25);
+		limparBtn.setBounds(100, 230, 70, 25);
+		cancelarBtn.setBounds(180, 230, 90, 25);
+		consultarBtn.setBounds(280, 230, 90, 25);
+		alterarBtn.setBounds(380, 230, 70, 25);
+		excluirBtn.setBounds(460, 230, 70, 25);
 
 		add(nomeJLabel);
 		add(nomeJTxtField);
