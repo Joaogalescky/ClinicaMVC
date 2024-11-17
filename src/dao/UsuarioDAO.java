@@ -10,7 +10,7 @@ import model.Usuario;
 public class UsuarioDAO {
 
 	public void cadastrarUsuario(Usuario usuario) throws ExceptionDAO {
-		String sql = "insert into Usuario (nome, dataNascimento, cpf, rg, telefone, email, endereco) values (?,?,?,?,?,?,?)";
+		String sql = "insert into Pessoa (nome, dataNascimento, cpf, rg, telefone, email, endereco) values (?,?,?,?,?,?,?)";
 		PreparedStatement stmt = null;
 		Connection connection = null;
 		try {
@@ -46,16 +46,15 @@ public class UsuarioDAO {
 		}
 	}
 
-	public Usuario consultarUsuario(String nome) throws ExceptionDAO {
-		String sql = "select * from Usuario where nome = ?";
+	public Usuario consultarUsuario(int codUser) throws ExceptionDAO {
+		String sql = "select * from Pessoa where idPessoa = ?";
 		try (Connection connection = new ConexaoBD().getConnection();
 				PreparedStatement stmt = connection.prepareStatement(sql)) {
-			stmt.setString(1, nome);
+			stmt.setLong(1, codUser);
 			ResultSet rs = stmt.executeQuery();
 
 			if (rs.next()) {
 				Usuario usuario = new Usuario();
-				usuario.setCodUser(rs.getInt("codUser"));
 				usuario.setNome(rs.getString("nome"));
 				usuario.setDataNascimento(rs.getString("dataNascimento"));
 				usuario.setCpf(rs.getString("cpf"));
@@ -74,7 +73,7 @@ public class UsuarioDAO {
 	}
 
 	public void alterarUsuario(Usuario usuario) throws ExceptionDAO {
-		String sql = "update Usuario set nome = ?, dataNascimento = ?, cpf = ?, rg = ?, telefone = ?, email = ?, endereco = ? where codUser = ?";
+		String sql = "update Pessoa set nome = ?, dataNascimento = ?, cpf = ?, rg = ?, telefone = ?, email = ?, endereco = ? where codUser = ?";
 		try (Connection connection = new ConexaoBD().getConnection();
 				PreparedStatement stmt = connection.prepareStatement(sql)) {
 			stmt.setString(1, usuario.getNome());
@@ -94,7 +93,7 @@ public class UsuarioDAO {
 	}
 
 	public void excluirUsuario(int codUser) throws ExceptionDAO {
-		String sql = "delete from Usuario where codUser = ?";
+		String sql = "delete from Pessoa where codUser = ?";
 		try (Connection connection = new ConexaoBD().getConnection();
 				PreparedStatement stmt = connection.prepareStatement(sql)) {
 			stmt.setInt(1, codUser);

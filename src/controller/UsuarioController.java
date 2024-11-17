@@ -30,9 +30,9 @@ public class UsuarioController {
 		}
 	}
 
-	public Usuario consultarUsuario(String nome) throws Exception {
-		if (nome != null && nome.length() > 0) {
-			Usuario usuario = new UsuarioDAO().consultarUsuario(nome);
+	public Usuario consultarUsuario(int codUser) throws Exception {
+		if (codUser > 0) {
+			Usuario usuario = new UsuarioDAO().consultarUsuario(codUser);
 			return usuario;
 		} else {
 			throw new Exception("Preencha os campos corretamente!");
