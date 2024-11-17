@@ -3,6 +3,8 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -13,12 +15,15 @@ import javax.swing.JOptionPane;
 public class TelaPrincipal extends JFrame {
 	private static final long serialVersionUID = 5420355494474613004L;
 
-	private JMenuBar barMenu; // cria a barra de menus
-	private JMenu cadastroMenu; // cria o menu Cadastro
-	private JMenu ajudaMenu; // cria o menu Compra
-	private JMenuItem usuarioMenuItem; // cria o item de menu usuario
-	private JMenuItem sobreMenuItem; // cria o item de menu sobre
-	private JMenuItem sairMenuItem; // cria o item de menu sair
+	private JMenuBar barMenu;
+	private JMenu cadastrarMenu;
+	private JMenu prontuarioMenu;
+	private JMenu ajudaMenu;
+
+	private JMenuItem cadastrarUsuarioMenuItem;
+	private JMenuItem agendamentoMenuItem;
+	private JMenuItem sobreMenuItem;
+	private JMenuItem sairMenuItem;
 
 	public TelaPrincipal() {
 
@@ -30,40 +35,58 @@ public class TelaPrincipal extends JFrame {
 		setLayout(new BorderLayout());
 
 		barMenu = new JMenuBar();
-		cadastroMenu = new JMenu("Cadastro");
+		cadastrarMenu = new JMenu("Cadastrar");
+		prontuarioMenu = new JMenu("Prontuario");
 		ajudaMenu = new JMenu("Ajuda");
 
-		usuarioMenuItem = new JMenuItem("Usuario");
+		cadastrarUsuarioMenuItem = new JMenuItem("Usuario");
+		agendamentoMenuItem = new JMenuItem("Agendamento");
 		sobreMenuItem = new JMenuItem("Sobre");
 		sairMenuItem = new JMenuItem("Sair");
 
-		cadastroMenu.setMnemonic('C');// configura o mnemônico como C
-		ajudaMenu.setMnemonic('A'); // configura o mnemônico como A
+		cadastrarMenu.setMnemonic('U'); // configura o mnemônico como U
+		prontuarioMenu.setMnemonic('P'); // configura o mnemônico como U
+		ajudaMenu.setMnemonic('A');
 
 		setJMenuBar(barMenu); // adiciona uma barra de menu na tela
-		barMenu.add(cadastroMenu);
+		barMenu.add(cadastrarMenu);
+		barMenu.add(prontuarioMenu);
 		barMenu.add(ajudaMenu);
 
-		cadastroMenu.add(usuarioMenuItem);
+		cadastrarMenu.add(cadastrarUsuarioMenuItem);
+		cadastrarMenu.add(agendamentoMenuItem);
 		ajudaMenu.add(sobreMenuItem);
 		ajudaMenu.add(sairMenuItem);
 
+		cadastrarUsuarioMenuItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent sair) {
+				TelaCadUser cadUsuario = new TelaCadUser();
+			}
+		});
+		agendamentoMenuItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent sair) {
+				TelaCadAgendamento cadAgendamento = new TelaCadAgendamento();
+			}
+		});
+		prontuarioMenu.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent sair) {
+				TelaProntuario telaProntuario = new TelaProntuario();
+                telaProntuario.setVisible(true);
+			}
+		});
 		sobreMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent sobre) {
-				JOptionPane.showMessageDialog(TelaPrincipal.this, "Este é um exemplo\n" + "do uso de menus.");
+				JOptionPane.showMessageDialog(TelaPrincipal.this, "Este é um exemplo do uso de menus.");
 			}
 		});
 		sairMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent sair) {
 				System.exit(0);
-			}
-		});
-		usuarioMenuItem.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent sair) {
-				TelaCadUser cadUsuario = new TelaCadUser();
 			}
 		});
 	}
