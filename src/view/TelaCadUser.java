@@ -31,9 +31,8 @@ public class TelaCadUser extends JFrame {
 	private JTextField emailJTxtField;
 	private JTextField enderecoJTxtField;
 
-	public JButton incluirBtn;
+	public JButton cadastrarBtn;
 	public JButton limparBtn;
-	public JButton cancelarBtn;
 	public JButton consultarBtn;
 	public JButton alterarBtn;
 	public JButton excluirBtn;
@@ -55,21 +54,20 @@ public class TelaCadUser extends JFrame {
 		emailJTxtField = new JTextField();
 		enderecoJLabel = new JLabel("Endereço");
 		enderecoJTxtField = new JTextField();
-		
-		incluirBtn = new JButton("Incluir");
+
+		cadastrarBtn = new JButton("Cadastrar");
 		alterarBtn = new JButton("Alterar");
 		limparBtn = new JButton("Limpar");
-		cancelarBtn = new JButton("Cancelar");
 		consultarBtn = new JButton("Consultar");
 		excluirBtn = new JButton("Excluir");
 
-		setSize(550, 320);  // (largura, altura)
+		setSize(530, 320); // (largura, altura)
 		setTitle("Cadastro de Usuarios");
 		setVisible(true);
 		setLayout(null);
 		setLocationRelativeTo(null);
 
-		nomeJLabel.setBounds(10, 10, 100, 25);
+		nomeJLabel.setBounds(10, 10, 100, 25); // (x, y, largura, altura)
 		nomeJTxtField.setBounds(150, 10, 200, 25);
 		dataNascimentoJLabel.setBounds(10, 40, 200, 25);
 		dataNascimentoJTxtField.setBounds(150, 40, 200, 25);
@@ -84,12 +82,11 @@ public class TelaCadUser extends JFrame {
 		enderecoJLabel.setBounds(10, 190, 100, 25);
 		enderecoJTxtField.setBounds(150, 190, 200, 25);
 
-		incluirBtn.setBounds(20, 230, 70, 25);
-		limparBtn.setBounds(100, 230, 70, 25);
-		cancelarBtn.setBounds(180, 230, 90, 25);
-		consultarBtn.setBounds(280, 230, 90, 25);
-		alterarBtn.setBounds(380, 230, 70, 25);
-		excluirBtn.setBounds(460, 230, 70, 25);
+		cadastrarBtn.setBounds(20, 230, 95, 25);
+		limparBtn.setBounds(125, 230, 80, 25);
+		consultarBtn.setBounds(215, 230, 90, 25);
+		alterarBtn.setBounds(315, 230, 90, 25);
+		excluirBtn.setBounds(415, 230, 80, 25);
 
 		add(nomeJLabel);
 		add(nomeJTxtField);
@@ -105,10 +102,9 @@ public class TelaCadUser extends JFrame {
 		add(emailJTxtField);
 		add(enderecoJLabel);
 		add(enderecoJTxtField);
-		
-		add(incluirBtn);
+
+		add(cadastrarBtn);
 		add(limparBtn);
-		add(cancelarBtn);
 		add(consultarBtn);
 		add(alterarBtn);
 		add(excluirBtn);
@@ -117,7 +113,7 @@ public class TelaCadUser extends JFrame {
 		excluirBtn.setEnabled(false);
 		// incluirBtn.setEnabled(false);
 
-		incluirBtn.addActionListener(new ActionListener() {
+		cadastrarBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -136,7 +132,6 @@ public class TelaCadUser extends JFrame {
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage());
 				}
-
 			}
 		});
 
@@ -145,7 +140,8 @@ public class TelaCadUser extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					UsuarioController usuarioController = new UsuarioController();
-					Usuario usuario = usuarioController.consultarUsuario(nomeJTxtField.getText());
+					int codUser = Integer.parseInt(JOptionPane.showInputDialog("Informe o id do usuario"));
+					Usuario usuario = usuarioController.consultarUsuario(codUser);
 					if (usuario != null) {
 						nomeJTxtField.setText(usuario.getNome());
 						dataNascimentoJTxtField.setText(usuario.getDataNascimento());
@@ -160,7 +156,6 @@ public class TelaCadUser extends JFrame {
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage());
 				}
-
 			}
 		});
 
@@ -190,7 +185,12 @@ public class TelaCadUser extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				nomeJTxtField.setText("");
+				dataNascimentoJTxtField.setText("");
+				cpfJTxtField.setText("");
+				rgJTxtField.setText("");
 				foneJTxtField.setText("");
+				emailJTxtField.setText("");
+				enderecoJTxtField.setText("");
 			}
 		});
 
@@ -209,13 +209,15 @@ public class TelaCadUser extends JFrame {
 				}
 			}
 		});
-
 	}
 
 	private void limparCampos() {
 		nomeJTxtField.setText("");
+		dataNascimentoJTxtField.setText("");
+		cpfJTxtField.setText("");
+		rgJTxtField.setText("");
 		foneJTxtField.setText("");
-		alterarBtn.setEnabled(true);
-		excluirBtn.setEnabled(true);
+		emailJTxtField.setText("");
+		enderecoJTxtField.setText("");
 	}
 }
