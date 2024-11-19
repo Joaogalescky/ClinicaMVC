@@ -117,6 +117,7 @@ public class TelaCadUser extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
+					//@formatter:off
 					UsuarioController usuarioController = new UsuarioController();
 					usuarioController.cadastrarUsuario(
 							nomeJTxtField.getText(), 
@@ -127,6 +128,7 @@ public class TelaCadUser extends JFrame {
 							emailJTxtField.getText(),
 							enderecoJTxtField.getText()
 							);
+					//@formatter:on
 					JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso");
 					limparCampos();
 				} catch (Exception ex) {
@@ -139,6 +141,7 @@ public class TelaCadUser extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
+					//@formatter:off
 					UsuarioController usuarioController = new UsuarioController();
 					int codUser = Integer.parseInt(JOptionPane.showInputDialog("Informe o id do usuario"));
 					Usuario usuario = usuarioController.consultarUsuario(codUser);
@@ -153,6 +156,7 @@ public class TelaCadUser extends JFrame {
 						alterarBtn.setEnabled(true);
 						excluirBtn.setEnabled(true);
 					}
+					//@formatter:on
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage());
 				}
@@ -163,6 +167,7 @@ public class TelaCadUser extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
+					//@formatter:off
 					UsuarioController usuarioController = new UsuarioController();
 					int codUser = Integer.parseInt(JOptionPane.showInputDialog("Informe o id do usuario"));
 					usuarioController.alterarUsuario(
@@ -174,6 +179,7 @@ public class TelaCadUser extends JFrame {
 							emailJTxtField.getText(), 
 							enderecoJTxtField.getText()
 							);
+					//@formatter:on
 					JOptionPane.showMessageDialog(null, "Usuario alterado com sucesso");
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage());
@@ -198,12 +204,14 @@ public class TelaCadUser extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
+					//@formatter:off
 					UsuarioController usuarioController = new UsuarioController();
 					int codUser = Integer
 							.parseInt(JOptionPane.showInputDialog("Informe o id do usuario a ser excluído: "));
 					usuarioController.excluirUsuario(codUser);
 					JOptionPane.showMessageDialog(null, "Usuario excluído com sucesso!");
 					limparCampos();
+					//@formatter:on
 				} catch (Exception ex) {
 					JOptionPane.showInputDialog("null", "Erro: " + ex.getMessage());
 				}
