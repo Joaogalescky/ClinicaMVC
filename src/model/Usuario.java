@@ -13,6 +13,20 @@ public class Usuario {
 	private String email;
 	private String endereco;
 
+	public Usuario() {
+	}
+
+	public Usuario(String nome, String dataNascimento, String cpf, String rg, String telefone, String email,
+			String endereco) {
+		this.nome = nome;
+		this.dataNascimento = dataNascimento;
+		this.cpf = cpf;
+		this.rg = rg;
+		this.telefone = telefone;
+		this.email = email;
+		this.endereco = endereco;
+	}
+
 	public int getCodUser() {
 		return codUser;
 	}
