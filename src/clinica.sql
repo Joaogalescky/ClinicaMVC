@@ -54,8 +54,8 @@ CREATE TABLE Atendimento (
 
 CREATE TABLE Usuario (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(50) NOT NULL,
+    username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(50) NOT NULL
-);
+) CHARACTER SET utf8 COLLATE utf8_bin;
 
 INSERT INTO Usuario (username, password) VALUES ('admin', 'admin123');

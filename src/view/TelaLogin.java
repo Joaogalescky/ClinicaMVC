@@ -62,7 +62,7 @@ public class TelaLogin extends JFrame {
 						new TelaPrincipal().setVisible(true); // Abre a tela principal
 						dispose(); // Fecha a tela de login
 					} else {
-						JOptionPane.showMessageDialog(null, "Invalid username or password");
+						JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos");
 					}
 				} catch (HeadlessException | SQLException e1) {
 					// TODO Auto-generated catch block
