@@ -107,12 +107,12 @@ public class UsuarioDAO {
 
 	public boolean autenticarUsuario(String username, String password) throws ExceptionDAO, SQLException {
 		Connection connection = null;
-		PreparedStatement pStatement = null;
+		PreparedStatement pStatement = null; //SQL Injection
 		ResultSet rs = null;
 
 		try {
 			connection = new ConexaoBD().getConnection();
-			String sql = "SELECT * FROM Usuario WHERE username = ? AND password = ?";
+			String sql = "SELECT * FROM Usuario WHERE BINARY username = ? AND BINARY password = ?";
 			pStatement = connection.prepareStatement(sql);
 			pStatement.setString(1, username);
 			pStatement.setString(2, password);
