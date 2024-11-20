@@ -2,6 +2,8 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -109,19 +111,20 @@ public class TelaCadUser extends JFrame {
 		add(alterarBtn);
 		add(excluirBtn);
 
-		alterarBtn.setEnabled(false);
-		excluirBtn.setEnabled(false);
-		// incluirBtn.setEnabled(false);
-
 		cadastrarBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
 					//@formatter:off
+					SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		            dateFormat.setLenient(false);
+					Date parsedDate = dateFormat.parse(dataNascimentoJTxtField.getText());
+					java.sql.Date sqlDateDataNascimento = new java.sql.Date(parsedDate.getTime());
+					
 					UsuarioController usuarioController = new UsuarioController();
 					usuarioController.cadastrarUsuario(
-							nomeJTxtField.getText(), 
-							dataNascimentoJTxtField.getText(), 
+							nomeJTxtField.getText(),
+							sqlDateDataNascimento,
 							cpfJTxtField.getText(), 
 							rgJTxtField.getText(), 
 							foneJTxtField.getText(), 
@@ -147,7 +150,9 @@ public class TelaCadUser extends JFrame {
 					Usuario usuario = usuarioController.consultarUsuario(codUser);
 					if (usuario != null) {
 						nomeJTxtField.setText(usuario.getNome());
-						dataNascimentoJTxtField.setText(usuario.getDataNascimento());
+						SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+						String dataFormatada = dateFormat.format(usuario.getDataNascimento());
+						dataNascimentoJTxtField.setText(dataFormatada);
 						cpfJTxtField.setText(usuario.getCpf());
 						rgJTxtField.setText(usuario.getRg());
 						foneJTxtField.setText(usuario.getTelefone());
@@ -155,7 +160,9 @@ public class TelaCadUser extends JFrame {
 						enderecoJTxtField.setText(usuario.getEndereco());
 						alterarBtn.setEnabled(true);
 						excluirBtn.setEnabled(true);
-					}
+					} else {
+		                JOptionPane.showMessageDialog(null, "Usuário não encontrado!");
+		            }
 					//@formatter:on
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage());
@@ -168,19 +175,31 @@ public class TelaCadUser extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					//@formatter:off
+					SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		            dateFormat.setLenient(false);
+					Date parsedDate = dateFormat.parse(dataNascimentoJTxtField.getText());
+					java.sql.Date sqlDateDataNascimento = new java.sql.Date(parsedDate.getTime());
+					
 					UsuarioController usuarioController = new UsuarioController();
 					int codUser = Integer.parseInt(JOptionPane.showInputDialog("Informe o id do usuario"));
+		            Usuario usuario = usuarioController.consultarUsuario(codUser);
+					if (usuario != null) {
 					usuarioController.alterarUsuario(
-							codUser, nomeJTxtField.getText(), 
-							dataNascimentoJTxtField.getText(), 
+							codUser, 
+							nomeJTxtField.getText(), 
+							sqlDateDataNascimento,
 							cpfJTxtField.getText(), 
 							rgJTxtField.getText(), 
 							foneJTxtField.getText(), 
 							emailJTxtField.getText(), 
 							enderecoJTxtField.getText()
 							);
-					//@formatter:on
 					JOptionPane.showMessageDialog(null, "Usuario alterado com sucesso");
+					//@formatter:on
+					} else {
+		                JOptionPane.showMessageDialog(null, "Usuário não encontrado!");
+		            }
+
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage());
 				}

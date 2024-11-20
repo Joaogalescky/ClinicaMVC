@@ -10,14 +10,14 @@ import model.Usuario;
 public class UsuarioDAO {
 
 	public void cadastrarUsuario(Usuario usuario) throws ExceptionDAO {
-		String sql = "insert into Pessoa (nome, dataNascimento, cpf, rg, telefone, email, endereco) values (?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO Pessoa (nome, dataNascimento, cpf, rg, telefone, email, endereco) VALUES (?,?,?,?,?,?,?)";
 		PreparedStatement stmt = null;
 		Connection connection = null;
 		try {
 			connection = new ConexaoBD().getConnection();
 			stmt = connection.prepareStatement(sql);
 			stmt.setString(1, usuario.getNome());
-			stmt.setString(2, usuario.getDataNascimento());
+			stmt.setDate(2, usuario.getDataNascimento());
 			stmt.setString(3, usuario.getCpf());
 			stmt.setString(4, usuario.getRg());
 			stmt.setString(5, usuario.getTelefone());
@@ -47,7 +47,7 @@ public class UsuarioDAO {
 	}
 
 	public Usuario consultarUsuario(int codUser) throws ExceptionDAO {
-		String sql = "select * from Pessoa where idPessoa = ?";
+		String sql = "SELECT * FROM Pessoa WHERE idPessoa = ?";
 		try (Connection connection = new ConexaoBD().getConnection();
 				PreparedStatement stmt = connection.prepareStatement(sql)) {
 			stmt.setLong(1, codUser);
@@ -56,7 +56,7 @@ public class UsuarioDAO {
 			if (rs.next()) {
 				Usuario usuario = new Usuario();
 				usuario.setNome(rs.getString("nome"));
-				usuario.setDataNascimento(rs.getString("dataNascimento"));
+				usuario.setDataNascimento(rs.getDate("dataNascimento"));
 				usuario.setCpf(rs.getString("cpf"));
 				usuario.setRg(rs.getString("rg"));
 				usuario.setTelefone(rs.getString("telefone"));
@@ -73,19 +73,18 @@ public class UsuarioDAO {
 	}
 
 	public void alterarUsuario(Usuario usuario) throws ExceptionDAO {
-		String sql = "update Pessoa set nome = ?, dataNascimento = ?, cpf = ?, rg = ?, telefone = ?, email = ?, endereco = ? where codUser = ?";
+		String sql = "UPDATE Pessoa SET nome = ?, dataNascimento = ?, cpf = ?, rg = ?, telefone = ?, email = ?, endereco = ? WHERE idPessoa = ?";
 		try (Connection connection = new ConexaoBD().getConnection();
 				PreparedStatement stmt = connection.prepareStatement(sql)) {
 			stmt.setString(1, usuario.getNome());
-			stmt.setString(2, usuario.getDataNascimento());
+			stmt.setDate(2, usuario.getDataNascimento());
 			stmt.setString(3, usuario.getCpf());
 			stmt.setString(4, usuario.getRg());
 			stmt.setString(5, usuario.getTelefone());
 			stmt.setString(6, usuario.getEmail());
 			stmt.setString(7, usuario.getEndereco());
-
+			stmt.setInt(8, usuario.getCodUser());
 			stmt.executeUpdate();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new ExceptionDAO("Erro ao alterar usuario: " + e);
@@ -93,7 +92,7 @@ public class UsuarioDAO {
 	}
 
 	public void excluirUsuario(int codUser) throws ExceptionDAO {
-		String sql = "delete from Pessoa where codUser = ?";
+		String sql = "DELETE FROM Pessoa WHERE idPessoa = ?";
 		try (Connection connection = new ConexaoBD().getConnection();
 				PreparedStatement stmt = connection.prepareStatement(sql)) {
 			stmt.setInt(1, codUser);
@@ -107,7 +106,7 @@ public class UsuarioDAO {
 
 	public boolean autenticarUsuario(String username, String password) throws ExceptionDAO, SQLException {
 		Connection connection = null;
-		PreparedStatement pStatement = null; //SQL Injection
+		PreparedStatement pStatement = null; // SQL Injection
 		ResultSet rs = null;
 
 		try {

@@ -8,7 +8,7 @@ public class UsuarioController {
 	public void cadastrarUsuario(
 	//@formatter:off
 			String nome, 
-			String dataNascimento, 
+			java.sql.Date dataNascimento, 
 			String cpf, 
 			String rg, 
 			String telefone,
@@ -47,7 +47,7 @@ public class UsuarioController {
 	//@formatter:off
 			int codUser, 
 			String nome, 
-			String dataNascimento, 
+			java.sql.Date dataNascimento, 
 			String cpf, 
 			String rg, 
 			String telefone,
@@ -58,7 +58,7 @@ public class UsuarioController {
 		if (
 		//@formatter:off
 				nome != null && nome.length() > 0 && 
-				dataNascimento != null && dataNascimento.length() > 0 && dataNascimento.length() <= 10 &&
+				dataNascimento != null &&
 				cpf != null && cpf.length() > 0  && cpf.length() <= 11 && 
 				rg != null && rg.length() > 0 && rg.length() <= 10 && 
 				telefone != null && telefone.length() > 0 && telefone.length() <= 12 && 
@@ -68,6 +68,12 @@ public class UsuarioController {
 		) {
 			Usuario usuario = new Usuario();
 			usuario.setCodUser(codUser);
+	        usuario.setDataNascimento(dataNascimento);
+	        usuario.setCpf(cpf);
+	        usuario.setRg(rg);
+	        usuario.setTelefone(telefone);
+	        usuario.setEmail(email);
+	        usuario.setEndereco(endereco);
 			usuario.alterarUsuario(usuario);
 		} else {
 			throw new Exception("Preencha os campos corretamente!");

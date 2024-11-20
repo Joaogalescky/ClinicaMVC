@@ -1,12 +1,14 @@
 package model;
 
+import java.sql.Date;
+
 import dao.ExceptionDAO;
 import dao.UsuarioDAO;
 
 public class Usuario {
 	private int codUser;
 	private String nome;
-	private String dataNascimento;
+	private Date dataNascimento;
 	private String cpf;
 	private String rg;
 	private String telefone;
@@ -16,7 +18,7 @@ public class Usuario {
 	public Usuario() {
 	}
 
-	public Usuario(String nome, String dataNascimento, String cpf, String rg, String telefone, String email,
+	public Usuario(String nome, java.sql.Date dataNascimento, String cpf, String rg, String telefone, String email,
 			String endereco) {
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
@@ -43,11 +45,11 @@ public class Usuario {
 		this.nome = nome;
 	}
 
-	public String getDataNascimento() {
+	public Date getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(String dataNascimento) {
+	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
