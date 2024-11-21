@@ -111,7 +111,7 @@ public class UsuarioDAO {
 
 		try {
 			connection = new ConexaoBD().getConnection();
-			String sql = "SELECT * FROM Usuario WHERE BINARY username = ? AND BINARY password = ?";
+			String sql = "SELECT * FROM Profissional WHERE BINARY username = ? AND BINARY password = ?";
 			pStatement = connection.prepareStatement(sql);
 			pStatement.setString(1, username);
 			pStatement.setString(2, password);
