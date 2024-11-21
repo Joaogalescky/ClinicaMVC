@@ -14,12 +14,14 @@ CREATE TABLE Pessoa (
 );
 
 CREATE TABLE Profissional (
-    idProfissional INT AUTO_INCREMENT PRIMARY KEY,
+    idProfissional INT PRIMARY KEY AUTO_INCREMENT,
     idPessoa INT,
     especialidade VARCHAR(50) NOT NULL,
     horarioAtend TIME,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(50) NOT NULL,
     FOREIGN KEY (idPessoa) REFERENCES Pessoa(idPessoa)
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 
 CREATE TABLE Paciente (
     idPaciente INT AUTO_INCREMENT PRIMARY KEY,
@@ -52,10 +54,5 @@ CREATE TABLE Atendimento (
     FOREIGN KEY (idAgendamento) REFERENCES Agendamento(idAgendamento)
 );
 
-CREATE TABLE Usuario (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    password VARCHAR(50) NOT NULL
-) CHARACTER SET utf8 COLLATE utf8_bin;
-
-INSERT INTO Usuario (username, password) VALUES ('admin', 'admin123');
+INSERT INTO Pessoa (nome, dataNascimento, cpf, rg, telefone, email, endereco) VALUES ('Henrique Barbosa Gomes', '1988-04-18', '11122233344', '555666777', '4599887766', 'henriquebarbosa@email.com', 'Rua Dos Ypes, 1224');
+INSERT INTO Profissional (idPessoa, especialidade, horarioAtend, username, password) VALUES (1, 'Ortopedista', '14:00:00', 'admin', 'admin123');
