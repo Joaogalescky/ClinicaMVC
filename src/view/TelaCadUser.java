@@ -174,34 +174,96 @@ public class TelaCadUser extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					//@formatter:off
-					SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		            dateFormat.setLenient(false);
-					Date parsedDate = dateFormat.parse(dataNascimentoJTxtField.getText());
-					java.sql.Date sqlDateDataNascimento = new java.sql.Date(parsedDate.getTime());
-					
 					UsuarioController usuarioController = new UsuarioController();
 					int codUser = Integer.parseInt(JOptionPane.showInputDialog("Informe o id do usuario"));
-		            Usuario usuario = usuarioController.consultarUsuario(codUser);
+					Usuario usuario = usuarioController.consultarUsuario(codUser);
+
 					if (usuario != null) {
-					usuarioController.alterarUsuario(
-							codUser, 
-							nomeJTxtField.getText(), 
-							sqlDateDataNascimento,
-							cpfJTxtField.getText(), 
-							rgJTxtField.getText(), 
-							foneJTxtField.getText(), 
-							emailJTxtField.getText(), 
-							enderecoJTxtField.getText()
-							);
-					JOptionPane.showMessageDialog(null, "Usuario alterado com sucesso");
-					//@formatter:on
+						// Se foi consultado, permite a edição
+						nomeJTxtField.setEditable(true);
+						dataNascimentoJTxtField.setEditable(true);
+						cpfJTxtField.setEditable(true);
+						rgJTxtField.setEditable(true);
+						foneJTxtField.setEditable(true);
+						emailJTxtField.setEditable(true);
+						enderecoJTxtField.setEditable(true);
+
+						// Preencher os campos
+						nomeJTxtField.setText(usuario.getNome());
+						SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+						String dataFormatada = dateFormat.format(usuario.getDataNascimento());
+						dataNascimentoJTxtField.setText(dataFormatada);
+						cpfJTxtField.setText(usuario.getCpf());
+						rgJTxtField.setText(usuario.getRg());
+						foneJTxtField.setText(usuario.getTelefone());
+						emailJTxtField.setText(usuario.getEmail());
+						enderecoJTxtField.setText(usuario.getEndereco());
+
+						alterarBtn.setText("Salvar Alterações");
+
+						// Habilitar o botão
+						alterarBtn.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								try {
+									// Salvar as alterações
+									SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+									Date parsedDate = dateFormat.parse(dataNascimentoJTxtField.getText());
+									java.sql.Date sqlDateDataNascimento = new java.sql.Date(parsedDate.getTime());
+
+									// Novos dados
+									usuarioController.alterarUsuario(codUser, nomeJTxtField.getText(),
+											sqlDateDataNascimento, cpfJTxtField.getText(), rgJTxtField.getText(),
+											foneJTxtField.getText(), emailJTxtField.getText(),
+											enderecoJTxtField.getText());
+									JOptionPane.showMessageDialog(null, "Usuário alterado com sucesso!");
+
+									alterarBtn.setText("Alterar");
+									nomeJTxtField.setEditable(false);
+									dataNascimentoJTxtField.setEditable(false);
+									cpfJTxtField.setEditable(false);
+									rgJTxtField.setEditable(false);
+									foneJTxtField.setEditable(false);
+									emailJTxtField.setEditable(false);
+									enderecoJTxtField.setEditable(false);
+
+								} catch (Exception ex) {
+									JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage());
+
+									alterarBtn.setText("Alterar");
+									nomeJTxtField.setEditable(false);
+									dataNascimentoJTxtField.setEditable(false);
+									cpfJTxtField.setEditable(false);
+									rgJTxtField.setEditable(false);
+									foneJTxtField.setEditable(false);
+									emailJTxtField.setEditable(false);
+									enderecoJTxtField.setEditable(false);
+								}
+							}
+						});
+
 					} else {
-		                JOptionPane.showMessageDialog(null, "Usuário não encontrado!");
-		            }
+						JOptionPane.showMessageDialog(null, "Usuário não encontrado!");
+						alterarBtn.setText("Alterar");
+						nomeJTxtField.setEditable(false);
+						dataNascimentoJTxtField.setEditable(false);
+						cpfJTxtField.setEditable(false);
+						rgJTxtField.setEditable(false);
+						foneJTxtField.setEditable(false);
+						emailJTxtField.setEditable(false);
+						enderecoJTxtField.setEditable(false);
+					}
 
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage());
+					alterarBtn.setText("Alterar");
+					nomeJTxtField.setEditable(false);
+					dataNascimentoJTxtField.setEditable(false);
+					cpfJTxtField.setEditable(false);
+					rgJTxtField.setEditable(false);
+					foneJTxtField.setEditable(false);
+					emailJTxtField.setEditable(false);
+					enderecoJTxtField.setEditable(false);
 				}
 			}
 		});

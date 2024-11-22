@@ -66,14 +66,7 @@ public class UsuarioController {
 				endereco != null && endereco.length() > 0	
 		//@formatter:on
 		) {
-			Usuario usuario = new Usuario();
-			usuario.setCodUser(codUser);
-	        usuario.setDataNascimento(dataNascimento);
-	        usuario.setCpf(cpf);
-	        usuario.setRg(rg);
-	        usuario.setTelefone(telefone);
-	        usuario.setEmail(email);
-	        usuario.setEndereco(endereco);
+			Usuario usuario = new Usuario(nome, dataNascimento, cpf, rg, telefone, email, endereco);
 			usuario.alterarUsuario(usuario);
 		} else {
 			throw new Exception("Preencha os campos corretamente!");
