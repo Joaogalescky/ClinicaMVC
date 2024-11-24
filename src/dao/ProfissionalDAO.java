@@ -10,7 +10,7 @@ import model.Profissional;
 public class ProfissionalDAO {
 
 	public void cadastrarProfissional(Profissional profissional) throws ExceptionDAO {
-		String sql = "INSERT INTO Profissional (idPessoa, especialidade, horarioAtend, username, password) VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO Profissional (idPessoa, especialidade, crm_estado, crm_numero, horarioAtend, username, password) VALUES (?,?,?,?,?,?,?)";
 		PreparedStatement stmt = null;
 		Connection connection = null;
 		try {
@@ -18,9 +18,11 @@ public class ProfissionalDAO {
 			stmt = connection.prepareStatement(sql);
 			stmt.setInt(1, profissional.getCodUser());
 			stmt.setString(2, profissional.getEspecialidade());
-			stmt.setTime(3, profissional.getHorarioAtend());
-			stmt.setString(4, profissional.getUsername());
-			stmt.setString(5, profissional.getPassword());
+			stmt.setString(3, profissional.getCrm_estado());
+			stmt.setString(4, profissional.getCrm_numero());
+			stmt.setTime(5, profissional.getHorarioAtend());
+			stmt.setString(6, profissional.getUsername());
+			stmt.setString(7, profissional.getPassword());
 			stmt.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -43,22 +45,24 @@ public class ProfissionalDAO {
 		}
 	}
 
-	public Profissional consultarProfissional(int codUser) throws ExceptionDAO {
-		String sql = "SELECT * FROM Profissional WHERE idPessoa = ?";
+	public Profissional consultarProfissional(int idProfissional) throws ExceptionDAO {
+		String sql = "SELECT * FROM Profissional WHERE idProfissional = ?";
 		try (Connection connection = new ConexaoBD().getConnection();
 				PreparedStatement stmt = connection.prepareStatement(sql)) {
-			stmt.setLong(1, codUser);
+			stmt.setLong(1, idProfissional);
 			ResultSet rs = stmt.executeQuery();
 
 			if (rs.next()) {
 				Profissional profissional = new Profissional();
+				profissional.setIdProfissional(rs.getInt("idProfissional"));
 				profissional.setEspecialidade(rs.getString("especialidade"));
+				profissional.setCrm_estado(rs.getString("crm_estado"));
+				profissional.setCrm_numero(rs.getString("crm_numero"));
 				profissional.setHorarioAtend(rs.getTime("horarioAtend"));
 				profissional.setUsername(rs.getString("username"));
 				profissional.setPassword(rs.getString("password"));
 				return profissional;
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new ExceptionDAO("Erro ao consultar profissional: " + e);
@@ -67,14 +71,16 @@ public class ProfissionalDAO {
 	}
 
 	public void alterarProfissional(Profissional profissional) throws ExceptionDAO {
-		String sql = "UPDATE Profissional SET especialidade = ?, horarioAtend = ?, username = ?, password = ? WHERE idProfissional = ?";
+		String sql = "UPDATE Profissional SET especialidade = ?, crm_estado = ?, crm_numero = ?, horarioAtend = ?, username = ?, password = ? WHERE idProfissional = ?";
 		try (Connection connection = new ConexaoBD().getConnection();
 				PreparedStatement stmt = connection.prepareStatement(sql)) {
 			stmt.setString(1, profissional.getEspecialidade());
-			stmt.setTime(2, profissional.getHorarioAtend());
-			stmt.setString(3, profissional.getUsername());
-			stmt.setString(4, profissional.getPassword());
-			stmt.setInt(5, profissional.getCodUser());
+			stmt.setString(2, profissional.getCrm_estado());
+			stmt.setString(3, profissional.getCrm_numero());
+			stmt.setTime(4, profissional.getHorarioAtend());
+			stmt.setString(5, profissional.getUsername());
+			stmt.setString(6, profissional.getPassword());
+			stmt.setInt(7, profissional.getIdProfissional());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -82,11 +88,11 @@ public class ProfissionalDAO {
 		}
 	}
 
-	public void excluirProfissional(int codUser) throws ExceptionDAO {
-		String sql = "DELETE FROM Profissional WHERE idProfissional = ?";
+	public void excluirProfissional(int idProfissional) throws ExceptionDAO {
+		String sql = "DELETE FROM Pessoa WHERE idPessoa = ?";
 		try (Connection connection = new ConexaoBD().getConnection();
 				PreparedStatement stmt = connection.prepareStatement(sql)) {
-			stmt.setInt(1, codUser);
+			stmt.setInt(1, idProfissional);
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
