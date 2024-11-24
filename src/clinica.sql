@@ -17,6 +17,8 @@ CREATE TABLE Profissional (
     idProfissional INT PRIMARY KEY AUTO_INCREMENT,
     idPessoa INT,
     especialidade VARCHAR(50) NOT NULL,
+    crm_estado VARCHAR(2) NOT NULL,
+    crm_numero VARCHAR(6) NOT NULL,
     horarioAtend TIME,
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(50) NOT NULL,
@@ -32,6 +34,8 @@ CREATE TABLE Paciente (
 CREATE TABLE Funcionario (
     idFuncionario INT AUTO_INCREMENT PRIMARY KEY,
     idPessoa INT,
+	username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(50) NOT NULL,
     FOREIGN KEY (idPessoa) REFERENCES Pessoa(idPessoa)
 );
 
@@ -54,5 +58,8 @@ CREATE TABLE Atendimento (
     FOREIGN KEY (idAgendamento) REFERENCES Agendamento(idAgendamento)
 );
 
-INSERT INTO Pessoa (nome, dataNascimento, cpf, rg, telefone, email, endereco) VALUES ('Henrique Barbosa Gomes', '1988-04-18', '11122233344', '555666777', '4599887766', 'henriquebarbosa@email.com', 'Rua Dos Ypes, 1224');
-INSERT INTO Profissional (idPessoa, especialidade, horarioAtend, username, password) VALUES (1, 'Ortopedista', '14:00:00', 'admin', 'admin123');
+INSERT INTO Pessoa (nome, dataNascimento, cpf, rg, telefone, email, endereco) VALUES ('Henrique Barbosa Gomes', '1988-04-18', '11122233344', '555666777', '45999887766', 'henriquebarbosa@email.com', 'Rua Dos Ypes, 1224');
+INSERT INTO Profissional (idPessoa, especialidade, crm_estado, crm_numero, horarioAtend, username, password) VALUES (1, 'Ortopedista', 'PR', '123456', '14:00:00', 'admin', 'admin123');
+
+INSERT INTO Pessoa (nome, dataNascimento, cpf, rg, telefone, email, endereco) VALUES ('Valeria', '1997-08-06', '44455566677', '777888999', '45988776655', 'valeria@email.com', 'Rua Das Rosas, 754');
+INSERT INTO Funcionario (idPessoa, username, password) VALUES (2, 'funcionario', 'funcionario');
