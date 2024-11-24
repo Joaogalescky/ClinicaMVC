@@ -17,8 +17,8 @@ public class FuncionarioDAO {
 			connection = new ConexaoBD().getConnection();
 			stmt = connection.prepareStatement(sql);
 			stmt.setInt(1, funcionario.getCodUser());
-			stmt.setString(4, funcionario.getUsername());
-			stmt.setString(5, funcionario.getPassword());
+			stmt.setString(2, funcionario.getUsername());
+			stmt.setString(3, funcionario.getPassword());
 			stmt.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -51,7 +51,6 @@ public class FuncionarioDAO {
 			if (rs.next()) {
 				Funcionario funcionario = new Funcionario();
 				funcionario.setIdFuncionario(rs.getInt("idFuncionario"));
-				funcionario.setCodUser(rs.getInt("codUser"));
 				funcionario.setUsername(rs.getString("username"));
 				funcionario.setPassword(rs.getString("password"));
 				return funcionario;
@@ -68,9 +67,9 @@ public class FuncionarioDAO {
 		String sql = "UPDATE Funcionario SET username = ?, password = ? WHERE idFuncionario = ?";
 		try (Connection connection = new ConexaoBD().getConnection();
 				PreparedStatement stmt = connection.prepareStatement(sql)) {
-			stmt.setString(3, funcionario.getUsername());
-			stmt.setString(4, funcionario.getPassword());
-			stmt.setInt(5, funcionario.getIdFuncionario());
+			stmt.setInt(1, funcionario.getIdFuncionario());
+			stmt.setString(2, funcionario.getUsername());
+			stmt.setString(3, funcionario.getPassword());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
