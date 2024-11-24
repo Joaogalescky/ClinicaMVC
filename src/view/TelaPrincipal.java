@@ -21,6 +21,7 @@ public class TelaPrincipal extends JFrame {
 	private JMenu ajudaMenu;
 
 	private JMenuItem cadastrarUsuarioMenuItem;
+	private JMenuItem cadastrarProfissionalMenuItem;
 	private JMenuItem agendamentoMenuItem;
 	private JMenuItem sobreMenuItem;
 	private JMenuItem sairMenuItem;
@@ -40,6 +41,7 @@ public class TelaPrincipal extends JFrame {
 		ajudaMenu = new JMenu("Ajuda");
 
 		cadastrarUsuarioMenuItem = new JMenuItem("Usuario");
+		cadastrarProfissionalMenuItem = new JMenuItem("Profissional");
 		agendamentoMenuItem = new JMenuItem("Agendamento");
 		sobreMenuItem = new JMenuItem("Sobre");
 		sairMenuItem = new JMenuItem("Sair");
@@ -54,6 +56,7 @@ public class TelaPrincipal extends JFrame {
 		barMenu.add(ajudaMenu);
 
 		cadastrarMenu.add(cadastrarUsuarioMenuItem);
+		cadastrarMenu.add(cadastrarProfissionalMenuItem);
 		cadastrarMenu.add(agendamentoMenuItem);
 		ajudaMenu.add(sobreMenuItem);
 		ajudaMenu.add(sairMenuItem);
@@ -62,6 +65,12 @@ public class TelaPrincipal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent sair) {
 				TelaCadUser cadUsuario = new TelaCadUser();
+			}
+		});
+		cadastrarProfissionalMenuItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent sair) {
+				TelaCadProfissional cadProfissional = new TelaCadProfissional();
 			}
 		});
 		agendamentoMenuItem.addActionListener(new ActionListener() {
