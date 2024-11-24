@@ -103,30 +103,4 @@ public class UsuarioDAO {
 			throw new ExceptionDAO("Erro ao excluir usuario: " + e);
 		}
 	}
-
-	public boolean autenticarUsuario(String username, String password) throws ExceptionDAO, SQLException {
-		Connection connection = null;
-		PreparedStatement pStatement = null; // SQL Injection
-		ResultSet rs = null;
-
-		try {
-			connection = new ConexaoBD().getConnection();
-			String sql = "SELECT * FROM Profissional WHERE BINARY username = ? AND BINARY password = ?";
-			pStatement = connection.prepareStatement(sql);
-			pStatement.setString(1, username);
-			pStatement.setString(2, password);
-			rs = pStatement.executeQuery();
-
-			return rs.next(); // Retorna true se encontrar o usuário
-		} catch (SQLException e) {
-			throw new ExceptionDAO("Erro ao autenticar usuário: " + e.getMessage());
-		} finally {
-			if (rs != null)
-				rs.close();
-			if (pStatement != null)
-				pStatement.close();
-			if (connection != null)
-				connection.close();
-		}
-	}
 }
