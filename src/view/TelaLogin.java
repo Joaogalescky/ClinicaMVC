@@ -17,44 +17,46 @@ import controller.LoginController;
 public class TelaLogin extends JFrame {
 	private static final long serialVersionUID = 1L;
 
-	private JTextField txtUsername;
-	private JPasswordField txtPassword;
-	private JButton btnLogin;
+	private JTextField usernameTxt;
+	private JPasswordField passwordTxt;
 	private LoginController loginController;
+	private JButton loginBtn;
+	private JButton primeiroCadastroBtn;
 
 	public TelaLogin() {
 		loginController = new LoginController();
 		setTitle("Login");
-		setSize(320, 200); // (largura, altura)
+		setSize(370, 200); // (largura, altura)
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(null);
 		setLocationRelativeTo(null);
 
 		JLabel lblUsername = new JLabel("Usuário:");
-		lblUsername.setBounds(30, 30, 80, 25); // (x, y, largura, altura)
-		add(lblUsername);
-
-		txtUsername = new JTextField();
-		txtUsername.setBounds(120, 30, 150, 25);
-		add(txtUsername);
-
 		JLabel lblPassword = new JLabel("Senha:");
+		usernameTxt = new JTextField();
+		passwordTxt = new JPasswordField();
+		loginBtn = new JButton("Login");
+		primeiroCadastroBtn = new JButton("Primeiro Cadastro");
+		
+		lblUsername.setBounds(30, 30, 80, 25); // (x, y, largura, altura)
 		lblPassword.setBounds(30, 70, 80, 25);
+		usernameTxt.setBounds(120, 30, 150, 25);
+		passwordTxt.setBounds(120, 70, 150, 25);
+		loginBtn.setBounds(30, 120, 100, 25);
+		primeiroCadastroBtn.setBounds(170, 120, 150, 25);
+		
+		add(lblUsername);
 		add(lblPassword);
-
-		txtPassword = new JPasswordField();
-		txtPassword.setBounds(120, 70, 150, 25);
-		add(txtPassword);
-
-		btnLogin = new JButton("Login");
-		btnLogin.setBounds(120, 120, 100, 25);
-		add(btnLogin);
-
-		btnLogin.addActionListener(new ActionListener() {
+		add(usernameTxt);
+		add(passwordTxt);
+		add(loginBtn);
+		add(primeiroCadastroBtn);
+		
+		loginBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String username = txtUsername.getText();
-				String password = new String(txtPassword.getPassword());
+				String username = usernameTxt.getText();
+				String password = new String(passwordTxt.getPassword());
 
 				try {
 					if (loginController.autenticar(username, password)) {
@@ -70,6 +72,14 @@ public class TelaLogin extends JFrame {
 				}
 			}
 		});
+		
+		primeiroCadastroBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new TelaSelecaoCadastro().setVisible(true);;
+                dispose();
+            }
+        });
 	}
 
 	public static void main(String[] args) {
