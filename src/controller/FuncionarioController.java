@@ -52,7 +52,7 @@ public class FuncionarioController {
 				password != null && password.length() > 0 && password.length() <= 20
 		//@formatter:on
 		) {
-			Funcionario funcionario = new Funcionario(idFuncionario, username, password);
+			Funcionario funcionario = new Funcionario(username, password);
 			new FuncionarioDAO().alterarFuncionario(funcionario);
 		} else {
 			throw new Exception("Erro ao atualizar funcionario: todos os campos devem ser preenchidos corretamente!");

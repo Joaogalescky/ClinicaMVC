@@ -67,9 +67,9 @@ public class FuncionarioDAO {
 		String sql = "UPDATE Funcionario SET username = ?, password = ? WHERE idFuncionario = ?";
 		try (Connection connection = new ConexaoBD().getConnection();
 				PreparedStatement stmt = connection.prepareStatement(sql)) {
-			stmt.setInt(1, funcionario.getIdFuncionario());
-			stmt.setString(2, funcionario.getUsername());
-			stmt.setString(3, funcionario.getPassword());
+			stmt.setString(1, funcionario.getUsername());
+			stmt.setString(2, funcionario.getPassword());
+			stmt.setInt(3, funcionario.getIdFuncionario());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
