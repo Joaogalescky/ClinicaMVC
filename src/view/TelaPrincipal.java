@@ -22,6 +22,7 @@ public class TelaPrincipal extends JFrame {
 
 	private JMenuItem cadastrarUsuarioMenuItem;
 	private JMenuItem cadastrarProfissionalMenuItem;
+	private JMenuItem cadastrarFuncionarioMenuItem;
 	private JMenuItem agendamentoMenuItem;
 	private JMenuItem sobreMenuItem;
 	private JMenuItem sairMenuItem;
@@ -42,12 +43,13 @@ public class TelaPrincipal extends JFrame {
 
 		cadastrarUsuarioMenuItem = new JMenuItem("Usuario");
 		cadastrarProfissionalMenuItem = new JMenuItem("Profissional");
+		cadastrarFuncionarioMenuItem = new JMenuItem("Funcionario");
 		agendamentoMenuItem = new JMenuItem("Agendamento");
 		sobreMenuItem = new JMenuItem("Sobre");
 		sairMenuItem = new JMenuItem("Sair");
 
 		cadastrarMenu.setMnemonic('U'); // configura o mnemônico como U
-		prontuarioMenu.setMnemonic('P'); // configura o mnemônico como U
+		prontuarioMenu.setMnemonic('P');
 		ajudaMenu.setMnemonic('A');
 
 		setJMenuBar(barMenu); // adiciona uma barra de menu na tela
@@ -57,6 +59,7 @@ public class TelaPrincipal extends JFrame {
 
 		cadastrarMenu.add(cadastrarUsuarioMenuItem);
 		cadastrarMenu.add(cadastrarProfissionalMenuItem);
+		cadastrarMenu.add(cadastrarFuncionarioMenuItem);
 		cadastrarMenu.add(agendamentoMenuItem);
 		ajudaMenu.add(sobreMenuItem);
 		ajudaMenu.add(sairMenuItem);
@@ -71,6 +74,12 @@ public class TelaPrincipal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent sair) {
 				TelaCadProfissional cadProfissional = new TelaCadProfissional();
+			}
+		});
+		cadastrarFuncionarioMenuItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent sair) {
+				TelaCadFuncionario cadFuncionario = new TelaCadFuncionario();
 			}
 		});
 		agendamentoMenuItem.addActionListener(new ActionListener() {
