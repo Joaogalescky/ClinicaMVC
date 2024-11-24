@@ -16,7 +16,7 @@ import model.Usuario;
 
 public class TelaCadUser extends JFrame {
 
-	private static final long serialVersionUID = 5756598100844974336L;
+	private static final long serialVersionUID = 1L;
 
 	private JLabel nomeJLabel;
 	private JLabel dataNascimentoJLabel;
@@ -25,6 +25,7 @@ public class TelaCadUser extends JFrame {
 	private JLabel foneJLabel;
 	private JLabel emailJLabel;
 	private JLabel enderecoJLabel;
+	
 	private JTextField nomeJTxtField;
 	private JTextField dataNascimentoJTxtField;
 	private JTextField cpfJTxtField;
