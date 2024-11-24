@@ -34,7 +34,7 @@ public class TelaCadProfissional extends JFrame {
     private JTextField usernameJTextField;
     private JPasswordField passwordField;
 
-    public JButton cadastrarBtn;
+    JButton cadastrarBtn;
     public JButton limparBtn;
     public JButton consultarBtn;
     public JButton alterarBtn;

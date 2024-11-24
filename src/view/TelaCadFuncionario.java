@@ -25,7 +25,7 @@ public class TelaCadFuncionario extends JFrame {
     private JTextField usernameJTextField;
     private JPasswordField passwordField;
 
-    private JButton cadastrarBtn;
+    JButton cadastrarBtn;
     private JButton limparBtn;
     private JButton consultarBtn;
     private JButton alterarBtn;
