@@ -3,18 +3,27 @@ package controller;
 import java.sql.SQLException;
 
 import dao.ExceptionDAO;
-import dao.UsuarioDAO;
+import dao.FuncionarioDAO;
+import dao.ProfissionalDAO;
 
 public class LoginController {
-	private UsuarioDAO usuarioDAO;
+	private ProfissionalDAO profissionalDAO;
+	private FuncionarioDAO funcionarioDAO;
 
 	public LoginController() {
-		this.usuarioDAO = new UsuarioDAO();
+		this.profissionalDAO = new ProfissionalDAO();
+		this.funcionarioDAO = new FuncionarioDAO();
 	}
 
 	public boolean autenticar(String username, String password) throws SQLException {
 		try {
-			return usuarioDAO.autenticarUsuario(username, password);
+			if (profissionalDAO.autenticarProfissional(username, password)) {
+				return true;
+			}
+			if (funcionarioDAO.autenticarFuncionario(username, password)) {
+				return true;
+			}
+			return false;
 		} catch (ExceptionDAO e) {
 			System.out.println("Erro ao autenticar usuário: " + e.getMessage());
 			return false;
