@@ -5,15 +5,15 @@ import dao.FuncionarioDAO;
 
 public class Funcionario {
 	private int idFuncionario;
-	private int codUser;
+	private int idPessoa;
 	private String username;
 	private String password;
 
 	public Funcionario() {
 	}
 
-	public Funcionario(int codUser, String username, String password) {
-		this.codUser = codUser;
+	public Funcionario(int idPessoa, String username, String password) {
+		this.idPessoa = idPessoa;
 		this.username = username;
 		this.password = password;
 	}
@@ -32,11 +32,11 @@ public class Funcionario {
 	}
 
 	public int getCodUser() {
-		return codUser;
+		return idPessoa;
 	}
 
-	public void setCodUser(int codUser) {
-		this.codUser = codUser;
+	public void setCodUser(int idPessoa) {
+		this.idPessoa = idPessoa;
 	}
 
 	public String getUsername() {
@@ -63,7 +63,7 @@ public class Funcionario {
 		new FuncionarioDAO().alterarFuncionario(funcionario);
 	}
 
-	public void excluirFuncionario(int codUser) throws ExceptionDAO {
-		new FuncionarioDAO().excluirFuncionario(codUser);
+	public void excluirFuncionario(int idPessoa) throws ExceptionDAO {
+		new FuncionarioDAO().excluirFuncionario(idPessoa);
 	}
 }
