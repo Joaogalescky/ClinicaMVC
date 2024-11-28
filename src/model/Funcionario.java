@@ -31,11 +31,11 @@ public class Funcionario {
 		this.idFuncionario = idFuncionario;
 	}
 
-	public int getCodUser() {
+	public int getIdPessoa() {
 		return idPessoa;
 	}
 
-	public void setCodUser(int idPessoa) {
+	public void setIdPessoa(int idPessoa) {
 		this.idPessoa = idPessoa;
 	}
 
