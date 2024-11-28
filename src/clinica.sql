@@ -15,7 +15,7 @@ CREATE TABLE Pessoa (
 
 CREATE TABLE Profissional (
     idProfissional INT PRIMARY KEY AUTO_INCREMENT,
-    idPessoa INT,
+    idPessoa INT NOT NULL,
     especialidade VARCHAR(50) NOT NULL,
     crm_estado VARCHAR(2),
     crm_numero VARCHAR(6),
@@ -27,13 +27,13 @@ CREATE TABLE Profissional (
 
 CREATE TABLE Paciente (
     idPaciente INT AUTO_INCREMENT PRIMARY KEY,
-    idPessoa INT,
+    idPessoa INT NOT NULL,
     FOREIGN KEY (idPessoa) REFERENCES Pessoa(idPessoa)
 );
 
 CREATE TABLE Funcionario (
     idFuncionario INT AUTO_INCREMENT PRIMARY KEY,
-    idPessoa INT,
+    idPessoa INT NOT NULL,
 	username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(50) NOT NULL,
     FOREIGN KEY (idPessoa) REFERENCES Pessoa(idPessoa)
