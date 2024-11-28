@@ -6,7 +6,7 @@ import dao.ExceptionDAO;
 import dao.UsuarioDAO;
 
 public class Usuario {
-	private int codUser;
+	private int idPessoa;
 	private String nome;
 	private Date dataNascimento;
 	private String cpf;
@@ -29,12 +29,12 @@ public class Usuario {
 		this.endereco = endereco;
 	}
 
-	public int getCodUser() {
-		return codUser;
+	public int getIdPessoa() {
+		return idPessoa;
 	}
 
-	public void setCodUser(int codUser) {
-		this.codUser = codUser;
+	public void setIdPessoa(int idPessoa) {
+		this.idPessoa = idPessoa;
 	}
 
 	public String getNome() {
@@ -101,7 +101,7 @@ public class Usuario {
 		new UsuarioDAO().alterarUsuario(usuario);
 	}
 
-	public void excluirUsuario(int codUser) throws ExceptionDAO {
-		new UsuarioDAO().excluirUsuario(codUser);
+	public void excluirUsuario(int idPessoa) throws ExceptionDAO {
+		new UsuarioDAO().excluirUsuario(idPessoa);
 	}
 }
