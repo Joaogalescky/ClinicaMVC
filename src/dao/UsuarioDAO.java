@@ -83,7 +83,7 @@ public class UsuarioDAO {
 			stmt.setString(5, usuario.getTelefone());
 			stmt.setString(6, usuario.getEmail());
 			stmt.setString(7, usuario.getEndereco());
-			stmt.setInt(8, usuario.getCodUser());
+			stmt.setInt(8, usuario.getIdPessoa());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
