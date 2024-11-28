@@ -16,7 +16,7 @@ public class ProfissionalDAO {
 		try {
 			connection = new ConexaoBD().getConnection();
 			stmt = connection.prepareStatement(sql);
-			stmt.setInt(1, profissional.getCodUser());
+			stmt.setInt(1, profissional.getIdPessoa());
 			stmt.setString(2, profissional.getEspecialidade());
 			stmt.setString(3, profissional.getCrm_estado());
 			stmt.setString(4, profissional.getCrm_numero());

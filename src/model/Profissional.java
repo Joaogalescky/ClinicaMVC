@@ -7,7 +7,7 @@ import dao.ProfissionalDAO;
 
 public class Profissional {
 	private int idProfissional;
-	private int codUser;
+	private int idPessoa;
 	private String especialidade;
 	private String crm_estado;
 	private String crm_numero;
@@ -18,18 +18,30 @@ public class Profissional {
 	public Profissional() {
 	}
 
-	// Cadastro
-	public Profissional(int codUser, String especialidade, String crm_estado, String crm_numero, Time horarioAtend, String username, String password) {
-		this.codUser = codUser;
-		this.especialidade = especialidade;
-		this.crm_estado = crm_estado;
-		this.crm_numero = crm_numero;
-		this.horarioAtend = horarioAtend;
-		this.username = username;
-		this.password = password;
+	public static Profissional criarParaCadastro(int idPessoa, String especialidade, String crm_estado, String crm_numero, Time horarioAtend, String username, String password) {
+		Profissional profissional = new Profissional();
+        profissional.idPessoa = idPessoa;
+        profissional.especialidade = especialidade;
+        profissional.crm_estado = crm_estado;
+        profissional.crm_numero = crm_numero;
+        profissional.horarioAtend = horarioAtend;
+        profissional.username = username;
+        profissional.password = password;
+        return profissional;
 	}
+	
+    public static Profissional criarParaAlteracao(int idProfissional, String especialidade, String crm_estado, String crm_numero, Time horarioAtend, String username, String password) {
+        Profissional profissional = new Profissional();
+        profissional.idProfissional = idProfissional;
+        profissional.especialidade = especialidade;
+        profissional.crm_estado = crm_estado;
+        profissional.crm_numero = crm_numero;
+        profissional.horarioAtend = horarioAtend;
+        profissional.username = username;
+        profissional.password = password;
+        return profissional;
+    }
 
-	// Consulta e Alterar
 	public Profissional(String especialidade, String crm_estado, String crm_numero, Time horarioAtend, String username, String password) {
 		this.especialidade = especialidade;
 		this.crm_estado = crm_estado;
@@ -47,12 +59,12 @@ public class Profissional {
 		this.idProfissional = idProfissional;
 	}
 
-	public int getCodUser() {
-		return codUser;
+	public int getIdPessoa() {
+		return idPessoa;
 	}
 
-	public void setCodUser(int codUser) {
-		this.codUser = codUser;
+	public void setIdPessoa(int idPessoa) {
+		this.idPessoa = idPessoa;
 	}
 
 	public String getEspecialidade() {
@@ -111,7 +123,7 @@ public class Profissional {
 		new ProfissionalDAO().alterarProfissional(profissional);
 	}
 
-	public void excluirProfissional(int codUser) throws ExceptionDAO {
-		new ProfissionalDAO().excluirProfissional(codUser);
+	public void excluirProfissional(int idPessoa) throws ExceptionDAO {
+		new ProfissionalDAO().excluirProfissional(idPessoa);
 	}
 }
