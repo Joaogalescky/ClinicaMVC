@@ -16,7 +16,7 @@ public class FuncionarioDAO {
 		try {
 			connection = new ConexaoBD().getConnection();
 			stmt = connection.prepareStatement(sql);
-			stmt.setInt(1, funcionario.getCodUser());
+			stmt.setInt(1, funcionario.getIdPessoa());
 			stmt.setString(2, funcionario.getUsername());
 			stmt.setString(3, funcionario.getPassword());
 			stmt.execute();
@@ -77,11 +77,11 @@ public class FuncionarioDAO {
 		}
 	}
 
-	public void excluirFuncionario(int codUser) throws ExceptionDAO {
+	public void excluirFuncionario(int idPessoa) throws ExceptionDAO {
 		String sql = "DELETE FROM Funcionario WHERE idFuncionario = ?";
 		try (Connection connection = new ConexaoBD().getConnection();
 				PreparedStatement stmt = connection.prepareStatement(sql)) {
-			stmt.setInt(1, codUser);
+			stmt.setInt(1, idPessoa);
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {

@@ -20,7 +20,7 @@ public class FuncionarioController {
 
 		//@formatter:on
 		) {
-			Funcionario funcionario = new Funcionario(codUser, username, password);
+			Funcionario funcionario = Funcionario.criarParaCadastro(codUser, username, password);
 			new FuncionarioDAO().cadastrarFuncionario(funcionario);
 		} else {
 			throw new Exception("Erro ao cadastrar funcionario: todos os campos devem ser preenchidos corretamente!");
@@ -52,7 +52,7 @@ public class FuncionarioController {
 				password != null && password.length() > 0 && password.length() <= 20
 		//@formatter:on
 		) {
-			Funcionario funcionario = new Funcionario(username, password);
+			Funcionario funcionario = Funcionario.criarParaAlteracao(idFuncionario, username, password);
 			new FuncionarioDAO().alterarFuncionario(funcionario);
 		} else {
 			throw new Exception("Erro ao atualizar funcionario: todos os campos devem ser preenchidos corretamente!");

@@ -18,6 +18,21 @@ public class Funcionario {
 		this.password = password;
 	}
 
+	public static Funcionario criarParaCadastro(int idPessoa, String username, String password) {
+		Funcionario funcionario = new Funcionario();
+		funcionario.username = username;
+		funcionario.password = password;
+		return funcionario;
+	}
+
+	public static Funcionario criarParaAlteracao(int idFuncionario, String username, String password) {
+		Funcionario funcionario = new Funcionario();
+		funcionario.idFuncionario = idFuncionario;
+		funcionario.username = username;
+		funcionario.password = password;
+		return funcionario;
+	}
+
 	public Funcionario(String username, String password) {
 		this.username = username;
 		this.password = password;
