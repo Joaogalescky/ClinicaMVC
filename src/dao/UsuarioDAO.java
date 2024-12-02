@@ -9,42 +9,49 @@ import model.Usuario;
 
 public class UsuarioDAO {
 
-	public void cadastrarUsuario(Usuario usuario) throws ExceptionDAO {
-		String sql = "INSERT INTO Pessoa (nome, dataNascimento, cpf, rg, telefone, email, endereco) VALUES (?,?,?,?,?,?,?)";
-		PreparedStatement stmt = null;
-		Connection connection = null;
-		try {
-			connection = new ConexaoBD().getConnection();
-			stmt = connection.prepareStatement(sql);
-			stmt.setString(1, usuario.getNome());
-			stmt.setDate(2, usuario.getDataNascimento());
-			stmt.setString(3, usuario.getCpf());
-			stmt.setString(4, usuario.getRg());
-			stmt.setString(5, usuario.getTelefone());
-			stmt.setString(6, usuario.getEmail());
-			stmt.setString(7, usuario.getEndereco());
+    public int cadastrarUsuario(Usuario usuario) throws ExceptionDAO {
+        String sql = "INSERT INTO Pessoa (nome, dataNascimento, cpf, rg, telefone, email, endereco) VALUES (?,?,?,?,?,?,?)";
+        PreparedStatement stmt = null;
+        Connection connection = null;
 
-			stmt.execute();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new ExceptionDAO("Erro ao cadastrar usuario: " + e);
-		} finally {
-			try {
-				if (stmt != null) {
-					stmt.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		try {
-			if (connection != null) {
-				connection.close();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+        try {
+            connection = new ConexaoBD().getConnection();
+            stmt = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, usuario.getNome());
+            stmt.setDate(2, usuario.getDataNascimento());
+            stmt.setString(3, usuario.getCpf());
+            stmt.setString(4, usuario.getRg());
+            stmt.setString(5, usuario.getTelefone());
+            stmt.setString(6, usuario.getEmail());
+            stmt.setString(7, usuario.getEndereco());
+
+            stmt.execute();
+
+            // Obter o ID gerado
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1);
+                } else {
+                    throw new SQLException("Erro ao cadastrar usuário: ID não gerado.");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new ExceptionDAO("Erro ao cadastrar usuário: " + e);
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 	public Usuario consultarUsuario(int codUser) throws ExceptionDAO {
 		String sql = "SELECT * FROM Pessoa WHERE idPessoa = ?";

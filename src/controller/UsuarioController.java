@@ -5,7 +5,7 @@ import model.Usuario;
 
 public class UsuarioController {
 
-	public void cadastrarUsuario(
+	public int cadastrarUsuario(
 	//@formatter:off
 			String nome, 
 			java.sql.Date dataNascimento, 
@@ -28,7 +28,7 @@ public class UsuarioController {
 		//@formatter:on
 		) {
 			Usuario usuario = new Usuario(nome, dataNascimento, cpf, rg, telefone, email, endereco);
-			usuario.cadastrarUsuario(usuario);
+			return new UsuarioDAO().cadastrarUsuario(usuario);
 		} else {
 			throw new Exception("Preencha os campos corretamente!");
 		}
