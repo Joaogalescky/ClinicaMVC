@@ -1,11 +1,12 @@
 package model;
 
+import java.sql.Date;
 import java.sql.Time;
 
 import dao.ExceptionDAO;
 import dao.ProfissionalDAO;
 
-public class Profissional {
+public class Profissional extends Usuario {
 	private int idProfissional;
 	private int idPessoa;
 	private String especialidade;
@@ -16,33 +17,49 @@ public class Profissional {
 	private String password;
 
 	public Profissional() {
+		super(); // Chama o construtor da classe Usuario
 	}
 
-	public static Profissional criarParaCadastro(int idPessoa, String especialidade, String crm_estado, String crm_numero, Time horarioAtend, String username, String password) {
+	public static Profissional criarParaCadastro(int idPessoa, String especialidade, String crm_estado,
+			String crm_numero, Time horarioAtend, String username, String password) {
 		Profissional profissional = new Profissional();
-        profissional.idPessoa = idPessoa;
-        profissional.especialidade = especialidade;
-        profissional.crm_estado = crm_estado;
-        profissional.crm_numero = crm_numero;
-        profissional.horarioAtend = horarioAtend;
-        profissional.username = username;
-        profissional.password = password;
-        return profissional;
+		profissional.idPessoa = idPessoa;
+		profissional.especialidade = especialidade;
+		profissional.crm_estado = crm_estado;
+		profissional.crm_numero = crm_numero;
+		profissional.horarioAtend = horarioAtend;
+		profissional.username = username;
+		profissional.password = password;
+		return profissional;
 	}
-	
-    public static Profissional criarParaAlteracao(int idProfissional, String especialidade, String crm_estado, String crm_numero, Time horarioAtend, String username, String password) {
-        Profissional profissional = new Profissional();
-        profissional.idProfissional = idProfissional;
-        profissional.especialidade = especialidade;
-        profissional.crm_estado = crm_estado;
-        profissional.crm_numero = crm_numero;
-        profissional.horarioAtend = horarioAtend;
-        profissional.username = username;
-        profissional.password = password;
-        return profissional;
-    }
 
-	public Profissional(String especialidade, String crm_estado, String crm_numero, Time horarioAtend, String username, String password) {
+	public static Profissional criarParaAlteracao(String especialidade, String crm_estado,
+			String crm_numero, Time horarioAtend, String username, String password, String nome, Date dataNascimento,
+			String cpf, String rg, String telefone, String email, String endereco) {
+		Profissional profissional = new Profissional();
+		profissional.especialidade = especialidade;
+		profissional.crm_estado = crm_estado;
+		profissional.crm_numero = crm_numero;
+		profissional.horarioAtend = horarioAtend;
+		profissional.username = username;
+		profissional.password = password;
+		return profissional;
+	}
+
+	public Profissional(String especialidade, String crm_estado, String crm_numero, Time horarioAtend, String username,
+			String password) {
+		this.especialidade = especialidade;
+		this.crm_estado = crm_estado;
+		this.crm_numero = crm_numero;
+		this.horarioAtend = horarioAtend;
+		this.username = username;
+		this.password = password;
+	}
+
+	public Profissional(String nome, java.sql.Date dataNascimento, String cpf, String rg, String telefone, String email,
+			String endereco, String especialidade, String crm_estado, String crm_numero, Time horarioAtend,
+			String username, String password) {
+		super(nome, dataNascimento, cpf, rg, telefone, email, endereco); // Chama o construtor da classe Usuario
 		this.especialidade = especialidade;
 		this.crm_estado = crm_estado;
 		this.crm_numero = crm_numero;

@@ -16,54 +16,41 @@ public class TelaCadastroCompleto extends JFrame {
 		setLocationRelativeTo(null);
 		setLayout(null);
 
-		// Exibe a tela de cadastro de usuário
-		TelaCadUser userScreen = new TelaCadUser();
-		userScreen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		userScreen.setVisible(true);
+		if (ehProfissional) {
+			TelaCadProfissional profissional = new TelaCadProfissional();
+			profissional.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			profissional.setVisible(true);
 
-		// Exibe o próximo cadastro
-		userScreen.cadastrarBtn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//@formatter:off
-                JOptionPane.showMessageDialog(null, "Cadastro de Pessoa concluído! Agora, prossiga com o cadastro de " +
-                (ehProfissional ? "Profissional." : "Funcionário."));
-                userScreen.dispose();
-
-                if (ehProfissional) {
-                    TelaCadProfissional profissionalScreen = new TelaCadProfissional();
-                    profissionalScreen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                    profissionalScreen.setVisible(true);
-
-                    // Ação ao botão de cadastro do Profissional
-                    profissionalScreen.cadastrarBtn.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            JOptionPane.showMessageDialog(null, "Cadastro de Profissional concluído! Retornando ao Login.");
-                            profissionalScreen.dispose();
-                            abrirTelaLogin();
-                        }
-                    });
-                //@formatter:on
-				} else {
-					TelaCadFuncionario funcionarioScreen = new TelaCadFuncionario();
-					funcionarioScreen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-					funcionarioScreen.setVisible(true);
-
-					// Ação ao botão de cadastro do Funcionário
-					funcionarioScreen.cadastrarBtn.addActionListener(new ActionListener() {
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							JOptionPane.showMessageDialog(null,
-									"Cadastro de Funcionário(a) concluído! Retornando ao Login.");
-							funcionarioScreen.dispose();
-							abrirTelaLogin();
-						}
-					});
+			profissional.cadastrarBtn.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					try {
+						JOptionPane.showMessageDialog(null, "Cadastro de Profissional concluído! Retornando ao Login.");
+						profissional.dispose();
+						abrirTelaLogin();
+					} catch (Exception ex) {
+						JOptionPane.showMessageDialog(null, "Erro no cadastro: " + ex.getMessage());
+					}
 				}
-				dispose();
-			}
-		});
+			});
+		} else {
+			TelaCadFuncionario funcionario = new TelaCadFuncionario();
+			funcionario.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			funcionario.setVisible(true);
+
+			funcionario.cadastrarBtn.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					try {
+						JOptionPane.showMessageDialog(null, "Cadastro de Funcionário(a) concluído! Retornando ao Login.");
+						funcionario.dispose();
+						abrirTelaLogin();
+					} catch (Exception ex) {
+						JOptionPane.showMessageDialog(null, "Erro no cadastro: " + ex.getMessage());
+					}
+				}
+			});
+		}
 	}
 
 	private void abrirTelaLogin() {

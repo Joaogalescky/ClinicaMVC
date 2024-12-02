@@ -3,6 +3,8 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,7 +20,24 @@ public class TelaCadProfissional extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
-    private JLabel idProfissionalLabel;
+    // Usuário
+    private JLabel nomeLabel;
+    private JLabel dataNascimentoLabel;
+    private JLabel cpfLabel;
+    private JLabel rgLabel;
+    private JLabel foneLabel;
+    private JLabel emailLabel;
+    private JLabel enderecoLabel;
+
+    private JTextField nomeJTxtField;
+    private JTextField dataNascimentoJTxtField;
+    private JTextField cpfJTxtField;
+    private JTextField rgJTxtField;
+    private JTextField foneJTxtField;
+    private JTextField emailJTxtField;
+    private JTextField enderecoJTxtField;
+    
+    // Profissional
     private JLabel especialidadeLabel;
     private JLabel crmEstadoLabel;
     private JLabel crmNumeroLabel;
@@ -26,14 +45,14 @@ public class TelaCadProfissional extends JFrame {
     private JLabel usernameLabel;
     private JLabel passwordLabel;
 
-    private JTextField idProfissionalJTextField;
-    private JTextField especialidadeJTextField;
-    private JTextField crmEstadoJTextField;
-    private JTextField crmNumeroJTextField;
-    private JTextField horarioAtendJTextField;
-    private JTextField usernameJTextField;
+    private JTextField especialidadeJTxtField;
+    private JTextField crmEstadoJTxtField;
+    private JTextField crmNumeroJTxtField;
+    private JTextField horarioAtendJTxtField;
+    private JTextField usernameJTxtField;
     private JPasswordField passwordField;
 
+    // Botões
     JButton cadastrarBtn;
     public JButton limparBtn;
     public JButton consultarBtn;
@@ -43,7 +62,24 @@ public class TelaCadProfissional extends JFrame {
     public TelaCadProfissional() {
         super("Cadastro de Profissionais");
 
-        idProfissionalLabel = new JLabel("Código do Usuário:");
+        // Campos de Usuário
+        nomeLabel = new JLabel("Nome:");
+        dataNascimentoLabel = new JLabel("Data de Nascimento:");
+        cpfLabel = new JLabel("CPF:");
+        rgLabel = new JLabel("RG:");
+        foneLabel = new JLabel("Telefone:");
+        emailLabel = new JLabel("E-mail:");
+        enderecoLabel = new JLabel("Endereço:");
+  
+        nomeJTxtField = new JTextField();
+        dataNascimentoJTxtField = new JTextField();
+        cpfJTxtField = new JTextField();
+        rgJTxtField = new JTextField();
+        foneJTxtField = new JTextField();
+        emailJTxtField = new JTextField();
+        enderecoJTxtField = new JTextField();
+       
+        // Campos de Profissional
         especialidadeLabel = new JLabel("Especialidade:");
         crmEstadoLabel = new JLabel("CRM Estado:");
         crmNumeroLabel = new JLabel("CRM Número:");
@@ -51,61 +87,90 @@ public class TelaCadProfissional extends JFrame {
         usernameLabel = new JLabel("Username:");
         passwordLabel = new JLabel("Password:");
 
-        idProfissionalJTextField = new JTextField();
-        especialidadeJTextField = new JTextField();
-        crmEstadoJTextField = new JTextField();
-        crmNumeroJTextField = new JTextField();
-        horarioAtendJTextField = new JTextField();
-        usernameJTextField = new JTextField();
+        especialidadeJTxtField = new JTextField();
+        crmEstadoJTxtField = new JTextField();
+        crmNumeroJTxtField = new JTextField();
+        horarioAtendJTxtField = new JTextField();
+        usernameJTxtField = new JTextField();
         passwordField = new JPasswordField();
 
+        // Botões
         cadastrarBtn = new JButton("Cadastrar");
         alterarBtn = new JButton("Alterar");
         limparBtn = new JButton("Limpar");
         consultarBtn = new JButton("Consultar");
         excluirBtn = new JButton("Excluir");
 
-        setSize(600, 400); // (largura, altura)
+        setSize(630, 550); // (largura, altura)
         setTitle("Cadastro de Profissionais");
         setVisible(true);
         setLayout(null);
         setLocationRelativeTo(null);
 
-        idProfissionalLabel.setBounds(10, 10, 150, 25); // (x, y, largura, altura)
-        idProfissionalJTextField.setBounds(230, 10, 300, 25);
-        especialidadeLabel.setBounds(10, 40, 150, 25);
-        especialidadeJTextField.setBounds(230, 40, 300, 25);
-        crmEstadoLabel.setBounds(10, 70, 150, 25);
-        crmEstadoJTextField.setBounds(230, 70, 300, 25);
-        crmNumeroLabel.setBounds(10, 100, 150, 25);
-        crmNumeroJTextField.setBounds(230, 100, 300, 25);
-        horarioAtendLabel.setBounds(10, 130, 250, 25);
-        horarioAtendJTextField.setBounds(230, 130, 300, 25);
-        usernameLabel.setBounds(10, 160, 150, 25);
-        usernameJTextField.setBounds(230, 160, 300, 25);
-        passwordLabel.setBounds(10, 190, 150, 25);
-        passwordField.setBounds(230, 190, 300, 25);
+        // Campos de Usuário
+        nomeLabel.setBounds(10, 10, 150, 25);
+        nomeJTxtField.setBounds(230, 10, 340, 25);
+        dataNascimentoLabel.setBounds(10, 40, 150, 25);
+        dataNascimentoJTxtField.setBounds(230, 40, 340, 25);
+        cpfLabel.setBounds(10, 70, 150, 25);
+        cpfJTxtField.setBounds(230, 70, 340, 25);
+        rgLabel.setBounds(10, 100, 150, 25);
+        rgJTxtField.setBounds(230, 100, 340, 25);
+        foneLabel.setBounds(10, 130, 150, 25);
+        foneJTxtField.setBounds(230, 130, 340, 25);
+        emailLabel.setBounds(10, 160, 150, 25);
+        emailJTxtField.setBounds(230, 160, 340, 25);
+        enderecoLabel.setBounds(10, 190, 150, 25);
+        enderecoJTxtField.setBounds(230, 190, 340, 25);
 
-        cadastrarBtn.setBounds(20, 250, 100, 25);
-        limparBtn.setBounds(130, 250, 80, 25);
-        consultarBtn.setBounds(220, 250, 100, 25);
-        alterarBtn.setBounds(330, 250, 100, 25);
-        excluirBtn.setBounds(440, 250, 80, 25);
+        add(nomeLabel);
+        add(nomeJTxtField);
+        add(dataNascimentoLabel);
+        add(dataNascimentoJTxtField);
+        add(cpfLabel);
+        add(cpfJTxtField);
+        add(rgLabel);
+        add(rgJTxtField);
+        add(foneLabel);
+        add(foneJTxtField);
+        add(emailLabel);
+        add(emailJTxtField);
+        add(enderecoLabel);
+        add(enderecoJTxtField);
+        
+        // Campos de Profissional
+        especialidadeLabel.setBounds(10, 220, 150, 25); // (x, y, largura, altura)
+        especialidadeJTxtField.setBounds(230, 220, 340, 25);
+        crmEstadoLabel.setBounds(10, 250, 150, 25);
+        crmEstadoJTxtField.setBounds(230, 250, 340, 25);
+        crmNumeroLabel.setBounds(10, 280, 150, 25);
+        crmNumeroJTxtField.setBounds(230, 280, 340, 25);
+        horarioAtendLabel.setBounds(10, 310, 150, 25);
+        horarioAtendJTxtField.setBounds(230, 310, 340, 25);
+        usernameLabel.setBounds(10, 340, 250, 25);
+        usernameJTxtField.setBounds(230, 340, 340, 25);
+        passwordLabel.setBounds(10, 370, 150, 25);
+        passwordField.setBounds(230, 370, 340, 25);
 
-        add(idProfissionalLabel);
-        add(idProfissionalJTextField);
         add(especialidadeLabel);
-        add(especialidadeJTextField);
+        add(especialidadeJTxtField);
         add(crmEstadoLabel);
-        add(crmEstadoJTextField);
+        add(crmEstadoJTxtField);
         add(crmNumeroLabel);
-        add(crmNumeroJTextField);
+        add(crmNumeroJTxtField);
         add(horarioAtendLabel);
-        add(horarioAtendJTextField);
+        add(horarioAtendJTxtField);
         add(usernameLabel);
-        add(usernameJTextField);
+        add(usernameJTxtField);
         add(passwordLabel);
         add(passwordField);
+
+        // Botões
+        cadastrarBtn.setBounds(10, 420, 120, 25);
+        limparBtn.setBounds(140, 420, 100, 25);
+        consultarBtn.setBounds(250, 420, 100, 25);
+        alterarBtn.setBounds(360, 420, 100, 25);
+        excluirBtn.setBounds(470, 420, 100, 25);
 
         add(cadastrarBtn);
         add(limparBtn);
@@ -116,21 +181,51 @@ public class TelaCadProfissional extends JFrame {
         cadastrarBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-					//@formatter:off
+            	try {
+                    if (especialidadeJTxtField.getText().isEmpty() ||
+                        crmEstadoJTxtField.getText().isEmpty() ||
+                        crmNumeroJTxtField.getText().isEmpty() ||
+                        horarioAtendJTxtField.getText().isEmpty() ||
+                        usernameJTxtField.getText().isEmpty() ||
+                        passwordField.getPassword().length == 0 ||
+                        nomeJTxtField.getText().isEmpty() ||
+                        dataNascimentoJTxtField.getText().isEmpty() ||
+                        cpfJTxtField.getText().isEmpty() ||
+                        rgJTxtField.getText().isEmpty() ||
+                        foneJTxtField.getText().isEmpty() ||
+                        emailJTxtField.getText().isEmpty() ||
+                        enderecoJTxtField.getText().isEmpty()) {
+                        throw new Exception("Todos os campos devem ser preenchidos.");
+                    }
+
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                    dateFormat.setLenient(false);
+                    Date parsedDate = dateFormat.parse(dataNascimentoJTxtField.getText());
+                    java.sql.Date sqlDateDataNascimento = new java.sql.Date(parsedDate.getTime());
+
+                    // Instanciar o controlador de profissional
                     ProfissionalController profissionalController = new ProfissionalController();
-                    Time horarioAtendimento = Time.valueOf(horarioAtendJTextField.getText());
-                    profissionalController.cadastrarProfissional(
-                            Integer.parseInt(idProfissionalJTextField.getText()),
-                            especialidadeJTextField.getText(),
-                            crmEstadoJTextField.getText(),
-                            crmNumeroJTextField.getText(),
-                            horarioAtendimento,
-                            usernameJTextField.getText(),
-                            new String(passwordField.getPassword()));
-					//@formatter:on
-                    JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
+
+                    // Cadastro integrado
+                    profissionalController.cadastrarProfissionalComUsuario(
+                        nomeJTxtField.getText(),
+                        sqlDateDataNascimento,
+                        cpfJTxtField.getText(),
+                        rgJTxtField.getText(),
+                        foneJTxtField.getText(),
+                        emailJTxtField.getText(),
+                        enderecoJTxtField.getText(),
+                        especialidadeJTxtField.getText(),
+                        crmEstadoJTxtField.getText(),
+                        crmNumeroJTxtField.getText(),
+                        Time.valueOf(horarioAtendJTxtField.getText()),
+                        usernameJTxtField.getText(),
+                        new String(passwordField.getPassword())
+                    );
+
+                    JOptionPane.showMessageDialog(null, "Cadastro de usuário e profissional realizado com sucesso!");
                     limparCampos();
+
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + ex.getMessage());
                 }
@@ -143,17 +238,25 @@ public class TelaCadProfissional extends JFrame {
                 try {
 					//@formatter:off
                     ProfissionalController profissionalController = new ProfissionalController();
-                    int idProfissional = Integer.parseInt(JOptionPane.showInputDialog("Informe o código do usuário:"));
-                    Profissional profissional = profissionalController.consultarProfissional(idProfissional);
+                    int idProfissional = Integer.parseInt(JOptionPane.showInputDialog("Informe o código do profissional:"));
+                    Profissional profissional = profissionalController.consultarProfissionalComUsuario(idProfissional);
 
                     if (profissional != null) {
-                        idProfissionalJTextField.setText(String.valueOf(profissional.getIdProfissional()));
-                        especialidadeJTextField.setText(profissional.getEspecialidade());
-                        crmEstadoJTextField.setText(profissional.getCrm_estado());
-                        crmNumeroJTextField.setText(profissional.getCrm_numero());
-                        horarioAtendJTextField.setText(profissional.getHorarioAtend().toString());
-                        usernameJTextField.setText(profissional.getUsername());
+                        especialidadeJTxtField.setText(profissional.getEspecialidade());
+                        crmEstadoJTxtField.setText(profissional.getCrm_estado());
+                        crmNumeroJTxtField.setText(profissional.getCrm_numero());
+                        horarioAtendJTxtField.setText(profissional.getHorarioAtend().toString());
+                        usernameJTxtField.setText(profissional.getUsername());
                         passwordField.setText(profissional.getPassword());
+
+                        nomeJTxtField.setText(profissional.getNome());
+                        dataNascimentoJTxtField.setText(profissional.getDataNascimento().toString());
+                        cpfJTxtField.setText(profissional.getCpf());
+                        rgJTxtField.setText(profissional.getRg());
+                        foneJTxtField.setText(profissional.getTelefone());
+                        emailJTxtField.setText(profissional.getEmail());
+                        enderecoJTxtField.setText(profissional.getEndereco());
+
                         alterarBtn.setEnabled(true);
                         excluirBtn.setEnabled(true);
     				//@formatter:on
@@ -170,24 +273,62 @@ public class TelaCadProfissional extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-					//@formatter:off
+                    // Solicita o ID do profissional para alteração
+                    int idProfissional = Integer.parseInt(JOptionPane.showInputDialog("Informe o código do profissional a ser alterado:"));
+
+                    // Chama o controlador para recuperar o profissional a partir do ID
                     ProfissionalController profissionalController = new ProfissionalController();
-                    Time horarioAtendimento = Time.valueOf(horarioAtendJTextField.getText());
-                    profissionalController.alterarProfissional(
-                            Integer.parseInt(idProfissionalJTextField.getText()),
-                            especialidadeJTextField.getText(),
-                            crmEstadoJTextField.getText(),
-                            crmNumeroJTextField.getText(),
-                            horarioAtendimento,
-                            usernameJTextField.getText(),
-                            new String(passwordField.getPassword()));
+                    Profissional profissional = profissionalController.consultarProfissionalComUsuario(idProfissional);
+
+                    // Verifica se o profissional foi encontrado
+                    if (profissional == null) {
+                        JOptionPane.showMessageDialog(null, "Profissional não encontrado.");
+                        return;
+                    }
+
+                    // Atualiza os dados do profissional com os valores dos campos de texto
+                    profissional.setNome(nomeJTxtField.getText());
+                    profissional.setDataNascimento(java.sql.Date.valueOf(dataNascimentoJTxtField.getText()));
+                    profissional.setCpf(cpfJTxtField.getText());
+                    profissional.setRg(rgJTxtField.getText());
+                    profissional.setTelefone(foneJTxtField.getText());
+                    profissional.setEmail(emailJTxtField.getText());
+                    profissional.setEndereco(enderecoJTxtField.getText());
+
+                    profissional.setEspecialidade(especialidadeJTxtField.getText());
+                    profissional.setCrm_estado(crmEstadoJTxtField.getText());
+                    profissional.setCrm_numero(crmNumeroJTxtField.getText());
+                    profissional.setHorarioAtend(Time.valueOf(horarioAtendJTxtField.getText()));
+                    profissional.setUsername(usernameJTxtField.getText());
+                    profissional.setPassword(new String(passwordField.getPassword()));
+
+                    // Chama o método para alterar os dados do profissional no banco
+                    profissionalController.alterarProfissionalComUsuario(
+                        profissional.getEspecialidade(),
+                        profissional.getCrm_estado(),
+                        profissional.getCrm_numero(),
+                        profissional.getHorarioAtend(),
+                        profissional.getUsername(),
+                        profissional.getPassword(),
+                        profissional.getNome(),
+                        profissional.getDataNascimento(),
+                        profissional.getCpf(),
+                        profissional.getRg(),
+                        profissional.getTelefone(),
+                        profissional.getEmail(),
+                        profissional.getEndereco()
+                    );
+
+                    // Exibe uma mensagem de sucesso
                     JOptionPane.showMessageDialog(null, "Alterações realizadas com sucesso!");
-					//@formatter:on
+
                 } catch (Exception ex) {
+                    // Exibe uma mensagem de erro
                     JOptionPane.showMessageDialog(null, "Erro ao alterar: " + ex.getMessage());
                 }
             }
         });
+
 
         excluirBtn.addActionListener(new ActionListener() {
             @Override
@@ -216,12 +357,18 @@ public class TelaCadProfissional extends JFrame {
     }
 
     private void limparCampos() {
-        idProfissionalJTextField.setText("");
-        especialidadeJTextField.setText("");
-        crmEstadoJTextField.setText("");
-        crmNumeroJTextField.setText("");
-        horarioAtendJTextField.setText("");
-        usernameJTextField.setText("");
+        nomeJTxtField.setText("");
+        dataNascimentoJTxtField.setText("");
+        cpfJTxtField.setText("");
+        rgJTxtField.setText("");
+        foneJTxtField.setText("");
+        emailJTxtField.setText("");
+        enderecoJTxtField.setText("");
+        especialidadeJTxtField.setText("");
+        crmEstadoJTxtField.setText("");
+        crmNumeroJTxtField.setText("");
+        horarioAtendJTxtField.setText("");
+        usernameJTxtField.setText("");
         passwordField.setText("");
     }
 }

@@ -35,30 +35,77 @@ public class ProfissionalController {
 			throw new Exception("Erro ao cadastrar profissional: todos os campos devem ser preenchidos corretamente!");
 		}
 	}
+	
+    public void cadastrarProfissionalComUsuario(
+    //@formatter:off
+            String nome,
+            java.sql.Date dataNascimento,
+            String cpf,
+            String rg,
+            String telefone,
+            String email,
+            String endereco,
+            String especialidade,
+            String crm_estado,
+            String crm_numero,
+            Time horarioAtend,
+            String username,
+            String password
+        //@formatter:on
+        ) throws Exception {
+			//@formatter:off
+            UsuarioController usuarioController = new UsuarioController();
+            int idPessoa = usuarioController.cadastrarUsuario(
+                nome,
+                dataNascimento,
+                cpf,
+                rg,
+                telefone,
+                email,
+                endereco
+            );
+            this.cadastrarProfissional(
+                idPessoa,
+                especialidade,
+                crm_estado,
+                crm_numero,
+                horarioAtend,
+                username,
+                password
+            );
+			//@formatter:on
+        }
 
-	public Profissional consultarProfissional(int idProfissional) throws Exception {
+	public Profissional consultarProfissionalComUsuario(int idProfissional) throws Exception {
 		if (idProfissional > 0) {
-			Profissional profissional = new ProfissionalDAO().consultarProfissional(idProfissional);
+			Profissional profissional = new ProfissionalDAO().consultarProfissionalComUsuario(idProfissional);
+	        if (profissional == null) {
+	            throw new Exception("Profissional não encontrado!");
+	        }
 			return profissional;
 		} else {
 			throw new Exception("Erro ao consultar profissional: todos os campos devem ser preenchidos corretamente!");
 		}
 	}
 
-	public void alterarProfissional(
+	public void alterarProfissionalComUsuario(
 	//@formatter:off
-			int idProfissional,
 			String especialidade, 
 			String crm_estado,
 			String crm_numero,
 			Time horarioAtend,
 			String username, 
-			String password
+			String password,
+			// Usuario
+			String nome,
+		    java.sql.Date dataNascimento,
+		    String cpf,
+		    String rg,
+		    String telefone,
+		    String email,
+		    String endereco
 	//@formatter:on
 	) throws Exception {
-		if (idProfissional <= 0) {
-			throw new Exception("ID do profissional é inválido!");
-		}
 		if (
 		//@formatter:off
 			especialidade != null && especialidade.length() > 0 &&
@@ -66,11 +113,18 @@ public class ProfissionalController {
 			crm_numero != null &&  crm_numero.length() == 6 &&
 			horarioAtend != null &&
 			username != null && username.length() > 0 && username.length() <= 25 &&
-			password != null && password.length() > 0 && password.length() <= 20
+			password != null && password.length() > 0 && password.length() <= 20 &&
+	        nome != null && nome.length() > 0 &&
+	        dataNascimento != null &&
+	        cpf != null && cpf.length() > 0 &&
+	        rg != null && rg.length() > 0 &&
+	        telefone != null && telefone.length() > 0 &&
+	        email != null && email.length() > 0 &&
+	        endereco != null && endereco.length() > 0
 		//@formatter:on
 		) {
-			Profissional profissional = Profissional.criarParaAlteracao(idProfissional, especialidade, crm_estado, crm_numero, horarioAtend, username, password);
-			new ProfissionalDAO().alterarProfissional(profissional);
+			Profissional profissional = Profissional.criarParaAlteracao(especialidade, crm_estado, crm_numero, horarioAtend, username, password, nome, dataNascimento, cpf, rg, telefone, email, endereco);
+			new ProfissionalDAO().alterarProfissionalComUsuario(profissional);
 		} else {
 			throw new Exception("Erro ao atualizar profissional: todos os campos devem ser preenchidos corretamente!");
 		}
