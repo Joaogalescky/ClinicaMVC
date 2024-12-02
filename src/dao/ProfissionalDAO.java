@@ -143,11 +143,11 @@ public class ProfissionalDAO {
 	            connection.commit();
 	        } catch (SQLException e) {
 	            connection.rollback(); // Reverter alterações em caso de erro
-	            throw new ExceptionDAO("Erro ao alterar profissional completo: " + e.getMessage());
+	            throw new ExceptionDAO("Erro ao alterar profissional: " + e.getMessage());
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
-	        throw new ExceptionDAO("Erro ao alterar profissional completo: " + e.getMessage());
+	        throw new ExceptionDAO("Erro ao alterar profissional: " + e.getMessage());
 	    }
 	}
 

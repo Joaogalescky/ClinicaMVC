@@ -90,40 +90,57 @@ public class ProfissionalController {
 
 	public void alterarProfissionalComUsuario(
 	//@formatter:off
-			String especialidade, 
-			String crm_estado,
-			String crm_numero,
-			Time horarioAtend,
-			String username, 
-			String password,
-			// Usuario
+			int idProfissional,
 			String nome,
 		    java.sql.Date dataNascimento,
 		    String cpf,
 		    String rg,
 		    String telefone,
 		    String email,
-		    String endereco
+		    String endereco,
+			String especialidade, 
+			String crm_estado,
+			String crm_numero,
+			Time horarioAtend,
+			String username, 
+			String password
 	//@formatter:on
 	) throws Exception {
 		if (
 		//@formatter:off
+		    nome != null && nome.length() > 0 &&
+		    dataNascimento != null &&
+		    cpf != null && cpf.length() > 0 &&
+		    rg != null && rg.length() > 0 &&
+		    telefone != null && telefone.length() > 0 &&
+		    email != null && email.length() > 0 &&
+		    endereco != null && endereco.length() > 0 &&
 			especialidade != null && especialidade.length() > 0 &&
 			crm_estado != null && crm_estado.length() == 2 &&
 			crm_numero != null &&  crm_numero.length() == 6 &&
 			horarioAtend != null &&
 			username != null && username.length() > 0 && username.length() <= 25 &&
-			password != null && password.length() > 0 && password.length() <= 20 &&
-	        nome != null && nome.length() > 0 &&
-	        dataNascimento != null &&
-	        cpf != null && cpf.length() > 0 &&
-	        rg != null && rg.length() > 0 &&
-	        telefone != null && telefone.length() > 0 &&
-	        email != null && email.length() > 0 &&
-	        endereco != null && endereco.length() > 0
+			password != null && password.length() > 0 && password.length() <= 20
 		//@formatter:on
 		) {
-			Profissional profissional = Profissional.criarParaAlteracao(especialidade, crm_estado, crm_numero, horarioAtend, username, password, nome, dataNascimento, cpf, rg, telefone, email, endereco);
+			//@formatter:off
+			Profissional profissional = Profissional.criarParaAlteracao(
+					idProfissional, 
+					nome, 
+					dataNascimento, 
+					cpf, 
+					rg, 
+					telefone, 
+					email, 
+					endereco, 
+					especialidade, 
+					crm_estado, 
+					crm_numero, 
+					horarioAtend,
+					username, 
+					password
+			);
+			//@formatter:on
 			new ProfissionalDAO().alterarProfissionalComUsuario(profissional);
 		} else {
 			throw new Exception("Erro ao atualizar profissional: todos os campos devem ser preenchidos corretamente!");

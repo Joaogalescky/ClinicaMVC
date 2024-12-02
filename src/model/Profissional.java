@@ -33,10 +33,11 @@ public class Profissional extends Usuario {
 		return profissional;
 	}
 
-	public static Profissional criarParaAlteracao(String especialidade, String crm_estado,
-			String crm_numero, Time horarioAtend, String username, String password, String nome, Date dataNascimento,
-			String cpf, String rg, String telefone, String email, String endereco) {
+	public static Profissional criarParaAlteracao(int idProfissional, String nome, Date dataNascimento,
+			String cpf, String rg, String telefone, String email, String endereco, String especialidade, String crm_estado,
+			String crm_numero, Time horarioAtend, String username, String password) {
 		Profissional profissional = new Profissional();
+		profissional.idProfissional = idProfissional;
 		profissional.especialidade = especialidade;
 		profissional.crm_estado = crm_estado;
 		profissional.crm_numero = crm_numero;

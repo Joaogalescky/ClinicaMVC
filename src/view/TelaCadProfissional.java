@@ -273,14 +273,10 @@ public class TelaCadProfissional extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    // Solicita o ID do profissional para alteração
                     int idProfissional = Integer.parseInt(JOptionPane.showInputDialog("Informe o código do profissional a ser alterado:"));
-
-                    // Chama o controlador para recuperar o profissional a partir do ID
                     ProfissionalController profissionalController = new ProfissionalController();
                     Profissional profissional = profissionalController.consultarProfissionalComUsuario(idProfissional);
 
-                    // Verifica se o profissional foi encontrado
                     if (profissional == null) {
                         JOptionPane.showMessageDialog(null, "Profissional não encontrado.");
                         return;
@@ -304,19 +300,21 @@ public class TelaCadProfissional extends JFrame {
 
                     // Chama o método para alterar os dados do profissional no banco
                     profissionalController.alterarProfissionalComUsuario(
-                        profissional.getEspecialidade(),
-                        profissional.getCrm_estado(),
-                        profissional.getCrm_numero(),
-                        profissional.getHorarioAtend(),
-                        profissional.getUsername(),
-                        profissional.getPassword(),
+                    	idProfissional,
                         profissional.getNome(),
                         profissional.getDataNascimento(),
                         profissional.getCpf(),
                         profissional.getRg(),
                         profissional.getTelefone(),
                         profissional.getEmail(),
-                        profissional.getEndereco()
+                        profissional.getEndereco(),
+                        profissional.getEspecialidade(),
+                        profissional.getCrm_estado(),
+                        profissional.getCrm_numero(),
+                        profissional.getHorarioAtend(),
+                        profissional.getUsername(),
+                        profissional.getPassword()
+
                     );
 
                     // Exibe uma mensagem de sucesso
