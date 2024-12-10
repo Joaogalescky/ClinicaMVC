@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -52,6 +53,10 @@ public class TelaCadProfissional extends JFrame {
     private JTextField usernameJTxtField;
     private JPasswordField passwordField;
 
+    // Funcionário
+    private JLabel tipoCadastroLabel;
+    private JComboBox<String> tipoCadastroComboBox;
+    
     // Botões
     JButton cadastrarBtn;
     public JButton limparBtn;
@@ -93,6 +98,10 @@ public class TelaCadProfissional extends JFrame {
         horarioAtendJTxtField = new JTextField();
         usernameJTxtField = new JTextField();
         passwordField = new JPasswordField();
+        
+        // Campos de Funcionário
+        tipoCadastroLabel = new JLabel("Tipo de Cadastro:");
+        tipoCadastroComboBox = new JComboBox<>(new String[] { "Profissional (Médico)", "Funcionário" });
 
         // Botões
         cadastrarBtn = new JButton("Cadastrar");
@@ -164,6 +173,13 @@ public class TelaCadProfissional extends JFrame {
         add(usernameJTxtField);
         add(passwordLabel);
         add(passwordField);
+        
+        // Campos de Funcionário
+        tipoCadastroLabel.setBounds(470, 10, 150, 25); // Canto superior direito
+        tipoCadastroComboBox.setBounds(470, 40, 150, 25);
+        
+        add(tipoCadastroLabel);
+        add(tipoCadastroComboBox);
 
         // Botões
         cadastrarBtn.setBounds(10, 420, 120, 25);
@@ -352,8 +368,30 @@ public class TelaCadProfissional extends JFrame {
                 limparCampos();
             }
         });
+    
+        tipoCadastroComboBox.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String selecionado = (String) tipoCadastroComboBox.getSelectedItem();
+				
+				if (selecionado.equals("Funcionário")) {
+					crmEstadoLabel.setEnabled(false);
+					crmEstadoJTxtField.setEnabled(false);
+					crmNumeroLabel.setEnabled(false);
+					crmNumeroJTxtField.setEnabled(false);
+					
+		            crmEstadoJTxtField.setText("");
+		            crmNumeroJTxtField.setText("");
+				} else if (selecionado.equals("Profissional")) {
+		            crmEstadoLabel.setEnabled(true);
+		            crmEstadoJTxtField.setEnabled(true);
+		            crmNumeroLabel.setEnabled(true);
+		            crmNumeroJTxtField.setEnabled(true);
+				}
+			}
+		});
     }
-
+    
     private void limparCampos() {
         nomeJTxtField.setText("");
         dataNascimentoJTxtField.setText("");
