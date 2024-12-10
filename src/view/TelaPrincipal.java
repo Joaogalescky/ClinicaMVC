@@ -22,7 +22,7 @@ public class TelaPrincipal extends JFrame {
 
 	private JMenuItem cadastrarUsuarioMenuItem;
 	private JMenuItem cadastrarProfissionalMenuItem;
-	private JMenuItem cadastrarFuncionarioMenuItem;
+//	private JMenuItem cadastrarFuncionarioMenuItem;
 	private JMenuItem agendamentoMenuItem;
 	private JMenuItem sobreMenuItem;
 	private JMenuItem sairMenuItem;
@@ -43,7 +43,7 @@ public class TelaPrincipal extends JFrame {
 
 		cadastrarUsuarioMenuItem = new JMenuItem("Usuario");
 		cadastrarProfissionalMenuItem = new JMenuItem("Profissional");
-		cadastrarFuncionarioMenuItem = new JMenuItem("Funcionario");
+//		cadastrarFuncionarioMenuItem = new JMenuItem("Funcionario");
 		agendamentoMenuItem = new JMenuItem("Agendamento");
 		sobreMenuItem = new JMenuItem("Sobre");
 		sairMenuItem = new JMenuItem("Sair");
@@ -59,7 +59,7 @@ public class TelaPrincipal extends JFrame {
 
 		cadastrarMenu.add(cadastrarUsuarioMenuItem);
 		cadastrarMenu.add(cadastrarProfissionalMenuItem);
-		cadastrarMenu.add(cadastrarFuncionarioMenuItem);
+//		cadastrarMenu.add(cadastrarFuncionarioMenuItem);
 		cadastrarMenu.add(agendamentoMenuItem);
 		ajudaMenu.add(sobreMenuItem);
 		ajudaMenu.add(sairMenuItem);
@@ -76,12 +76,12 @@ public class TelaPrincipal extends JFrame {
 				TelaCadProfissional cadProfissional = new TelaCadProfissional();
 			}
 		});
-		cadastrarFuncionarioMenuItem.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent sair) {
-				TelaCadFuncionario cadFuncionario = new TelaCadFuncionario();
-			}
-		});
+//		cadastrarFuncionarioMenuItem.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent sair) {
+//				TelaCadFuncionario cadFuncionario = new TelaCadFuncionario();
+//			}
+//		});
 		agendamentoMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent sair) {
